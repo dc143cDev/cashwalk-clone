@@ -18,4 +18,18 @@ dev_dependencies:
 
 flutter: 
   uses-material-design: true
+  assets:
+    - assets/
+  fonts:
+    - family: IBMKR
+      fonts:
+        - asset: assets/fonts/IBM_Plex_Sans_KR/IBMPlexSansKR-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/IBM_Plex_Sans_KR/IBMPlexSansKR-Regular.ttf
+          weight: 300
+
+    - family: LS
+      fonts:
+        - asset: assets/fonts/Lobster/Lobster-Regular.ttf
+          weight: 700
 
