@@ -10,6 +10,7 @@ dependencies:
   get: 4.6.5
   flutter: 
     sdk: flutter
+  percent_indicator: ^4.2.2
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
@@ -19,7 +20,7 @@ dev_dependencies:
 flutter: 
   uses-material-design: true
   assets:
-    - assets/
+    - assets/images/
   fonts:
     - family: IBMKR
       fonts:
