@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../../palette.dart';
+import '../controllers/walk_controller.dart';
+import 'package:get/get.dart';
 
-class WalkView extends StatefulWidget {
+class WalkView extends GetView<WalkController> {
   const WalkView({Key? key}) : super(key: key);
 
   @override
-  State<WalkView> createState() => _WalkViewState();
-}
-
-class _WalkViewState extends State<WalkView> {
-  @override
   Widget build(BuildContext context) {
+    Get.put(WalkController());
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -35,7 +33,9 @@ class _WalkViewState extends State<WalkView> {
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              WalkController.to.shareBtnClicked();
+            },
             icon: Icon(
               Icons.settings,
               color: accentYellow,
@@ -52,26 +52,6 @@ class _WalkViewState extends State<WalkView> {
             Container(
               child: Stack(
                 children: [
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 15,
-                      ),
-                      FloatingActionButton.small(
-                        backgroundColor: accentBrown,
-                        onPressed: () {},
-                        child: Icon(Icons.camera_alt),
-                      ),
-                      SizedBox(
-                        width: 265,
-                      ),
-                      FloatingActionButton.small(
-                        backgroundColor: accentBrown,
-                        onPressed: () {},
-                        child: Icon(Icons.share),
-                      ),
-                    ],
-                  ),
                   Container(
                     margin: EdgeInsets.all(10),
                     decoration: BoxDecoration(
@@ -157,6 +137,50 @@ class _WalkViewState extends State<WalkView> {
                         ),
                       ],
                     ),
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 15,
+                      ),
+                      FloatingActionButton.small(
+                        backgroundColor: accentBrown,
+                        onPressed: () {
+                          Get.bottomSheet(
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      'Bottom Sheet',
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                  ),
+                                  OutlinedButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    child: const Text('Close'),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        child: Icon(Icons.camera),
+                      ),
+                      SizedBox(
+                        width: 265,
+                      ),
+                      FloatingActionButton.small(
+                        backgroundColor: accentBrown,
+                        onPressed: () {
+                          WalkController.to.shareBtnClicked();
+                        },
+                        child: Icon(Icons.share),
+                      ),
+                    ],
                   ),
                 ],
               ),

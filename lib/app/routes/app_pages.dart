@@ -10,6 +10,8 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/more/bindings/more_binding.dart';
 import '../modules/more/views/more_view.dart';
+import '../modules/my_bottom_nav_bar/bindings/my_bottom_nav_bar_binding.dart';
+import '../modules/my_bottom_nav_bar/views/my_bottom_nav_bar_view.dart';
 import '../modules/news/bindings/news_binding.dart';
 import '../modules/news/views/news_view.dart';
 import '../modules/walk/bindings/walk_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.MORE,
       page: () => const MoreView(),
       binding: MoreBinding(),
+    ),
+    GetPage(
+      name: _Paths.MY_BOTTOM_NAV_BAR,
+      page: () => const MyBottomNavBarView(),
+      binding: MyBottomNavBarBinding(),
     ),
   ];
 }

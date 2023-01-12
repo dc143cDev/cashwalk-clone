@@ -11,6 +11,7 @@ abstract class Routes {
   static const NEWS = _Paths.NEWS;
   static const MENU = _Paths.MENU;
   static const MORE = _Paths.MORE;
+  static const MY_BOTTOM_NAV_BAR = _Paths.MY_BOTTOM_NAV_BAR;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const NEWS = '/news';
   static const MENU = '/menu';
   static const MORE = '/more';
+  static const MY_BOTTOM_NAV_BAR = '/my-bottom-nav-bar';
 }

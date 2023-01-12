@@ -1,12 +1,16 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WalkController extends GetxController {
-  //TODO: Implement WalkController
+  static WalkController get to => Get.find();
 
-  final count = 0.obs;
+  final isCameraBtnClicked = false.obs;
+  final isShareBtnClicked = false.obs;
+
   @override
   void onInit() {
     super.onInit();
+    startWalk();
   }
 
   @override
@@ -19,5 +23,29 @@ class WalkController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  shareBtnClicked() {
+    Get.bottomSheet(
+      Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            Center(
+              child: Text(
+                'Bottom Sheet',
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: const Text('Close'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  startWalk() {}
 }
