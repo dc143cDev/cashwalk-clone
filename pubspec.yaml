@@ -12,6 +12,7 @@ dependencies:
     sdk: flutter
   percent_indicator: ^4.2.2
   pedometer: ^3.0.0
+  image_picker: ^0.8.6
 
 dev_dependencies: 
   flutter_lints: ^2.0.0

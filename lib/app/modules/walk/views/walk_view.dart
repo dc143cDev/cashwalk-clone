@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/modules/walk/views/indicator_circular_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../palette.dart';
@@ -122,19 +123,8 @@ class WalkView extends GetView<WalkController> {
                                 ),
                               );
                             }),
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.blue,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
+                        IndicatorCircularView(),
+                        IndicatorCircularView(),
                       ],
                     ),
                   ),

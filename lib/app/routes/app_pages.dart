@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/camera/bindings/camera_binding.dart';
+import '../modules/camera/views/camera_view.dart';
 import '../modules/community/bindings/community_binding.dart';
 import '../modules/community/views/community_view.dart';
 import '../modules/friends/bindings/friends_binding.dart';
@@ -64,6 +66,11 @@ class AppPages {
       name: _Paths.MY_BOTTOM_NAV_BAR,
       page: () => const MyBottomNavBarView(),
       binding: MyBottomNavBarBinding(),
+    ),
+    GetPage(
+      name: _Paths.CAMERA,
+      page: () => const CameraView(),
+      binding: CameraBinding(),
     ),
   ];
 }
