@@ -134,29 +134,10 @@ class WalkView extends GetView<WalkController> {
                         width: 15,
                       ),
                       FloatingActionButton.small(
+                        heroTag: 'goToCamera',
                         backgroundColor: accentBrown,
                         onPressed: () {
-                          Get.bottomSheet(
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Column(
-                                children: [
-                                  Center(
-                                    child: Text(
-                                      'Bottom Sheet',
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                  ),
-                                  OutlinedButton(
-                                    onPressed: () {
-                                      Get.back();
-                                    },
-                                    child: const Text('Close'),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
+                          controller.cameraButtonClicked();
                         },
                         child: Icon(Icons.camera),
                       ),

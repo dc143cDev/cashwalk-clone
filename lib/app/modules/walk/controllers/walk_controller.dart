@@ -1,10 +1,13 @@
 import 'dart:async';
 
+import 'package:get_storage/get_storage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WalkController extends GetxController {
   static WalkController get to => Get.find();
+  final storage = GetStorage();
 
   final isCameraBtnClicked = false.obs;
   final isShareBtnClicked = false.obs;
@@ -67,10 +70,7 @@ class WalkController extends GetxController {
   }
 
   pointCountUp() {
-    if (walk100.value == 10) {
-      walk100.value - 10;
-      pointCount.value++;
-    }
+    if (walk100.value == 10) {}
     //포인트가 오를 때, 100 만보기의 값은 0이 됨. 100 걸음 = 1포인트.
   }
 
@@ -89,5 +89,9 @@ class WalkController extends GetxController {
       walk100.value -= 100;
       pointCount.value++;
     });
+  }
+
+  cameraButtonClicked() {
+    Get.toNamed('/camera');
   }
 }

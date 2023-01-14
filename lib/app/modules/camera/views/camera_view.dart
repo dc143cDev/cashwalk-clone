@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 import '../controllers/camera_controller.dart';
 
@@ -14,9 +16,31 @@ class CameraView extends GetView<CameraController> {
         centerTitle: true,
       ),
       body: Center(
-        child: Text(
-          'CameraView is working',
-          style: TextStyle(fontSize: 20),
+        child: Column(
+          children: [
+            Obx(
+              () => controller.selectedImagePath.value == ''
+                  ? Text('No image')
+                  : Image.file(
+                      File(controller.selectedImagePath.value),
+                    ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            // FloatingActionButton(
+            //   onPressed: () {
+            //     controller.getImage(ImageSource.camera);
+            //   },
+            //   child: Text('c'),
+            // ),
+            FloatingActionButton(
+              onPressed: () {
+                controller.getImage(ImageSource.gallery);
+              },
+              child: Text('g'),
+            ),
+          ],
         ),
       ),
     );
