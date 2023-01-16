@@ -1,25 +1,31 @@
+import 'package:cashwalkclone/app/modules/walk/controllers/walk_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
+import 'package:get_storage/get_storage.dart';
 
 class CameraController extends GetxController {
-  var selectedImagePath = ''.obs;
-  var selectedImageSize = ''.obs;
+  WalkController walkController = WalkController();
+  final storage = GetStorage();
 
-  PickedFile? image;
+  var selectedImagePath = '0'.obs;
 
-  void getImage(ImageSource imageSource) async {
-    final pickedFile =
-        await ImagePicker.platform.pickImage(source: imageSource);
-    if (pickedFile != null) {
-      selectedImagePath.value == pickedFile.path;
-      selectedImagePath.value ==
-          ((File(selectedImagePath.value)).lengthSync() / 1024 / 1024)
-                  .toStringAsFixed(2) +
-              "Mb";
-    } else {
-      Get.snackbar('Error', 'No image');
-    }
+  var galleryPageIndex = 0.obs;
+
+  final pageController = PageController(initialPage: 0);
+
+  onGalleryPageChanged(int page) {
+    print('page num:' + page.toString());
+    int currentPage = page.toInt();
+    //페이지가 바뀔때마다 호출. 즉, galleryPageIndex 가 현재 페이지를 담게 됨.
+    galleryPageIndex.value = currentPage;
+    print('main page image path:' + selectedImagePath.value.toString());
+    print('current page:' + galleryPageIndex.value.toString());
+  }
+
+  applyBtnClicked() {
+    selectedImagePath.value = galleryPageIndex.value.toString();
+    storage.write('mainPageImageIndex', selectedImagePath.value);
+    print('write:' + storage.read('mainPageImageIndex'));
   }
 
   @override
@@ -35,11 +41,5 @@ class CameraController extends GetxController {
   @override
   void onClose() {
     super.onClose();
-  }
-
-  Future galleryButtonClicked() async {
-    var _image =
-        await ImagePicker.platform.pickImage(source: ImageSource.gallery);
-    image = _image;
   }
 }

@@ -11,7 +11,6 @@ dependencies:
   flutter: 
     sdk: flutter
   percent_indicator: ^4.2.2
-  pedometer: ^3.0.0
   image_picker: ^0.8.6
   get_storage: ^2.0.3
 
@@ -28,7 +27,7 @@ flutter:
     - family: IBMKR
       fonts:
         - asset: assets/fonts/IBM_Plex_Sans_KR/IBMPlexSansKR-Bold.ttf
-          weight: 700
+          weight: 600
         - asset: assets/fonts/IBM_Plex_Sans_KR/IBMPlexSansKR-Regular.ttf
           weight: 300
 

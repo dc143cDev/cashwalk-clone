@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/modules/camera/controllers/camera_controller.dart';
 import 'package:cashwalkclone/app/modules/walk/views/indicator_circular_view.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,9 @@ class WalkView extends GetView<WalkController> {
   @override
   Widget build(BuildContext context) {
     Get.put(WalkController());
+    Get.put(CameraController());
+
+    CameraController cameraController = CameraController();
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -27,7 +31,9 @@ class WalkView extends GetView<WalkController> {
         backgroundColor: bgColor,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              cameraController.applyBtnClicked();
+            },
             icon: Icon(
               Icons.add_alert,
               color: accentYellow,
@@ -35,7 +41,7 @@ class WalkView extends GetView<WalkController> {
           ),
           IconButton(
             onPressed: () {
-              WalkController.to.shareBtnClicked();
+              controller.shareBtnClicked();
             },
             icon: Icon(
               Icons.settings,
@@ -53,79 +59,86 @@ class WalkView extends GetView<WalkController> {
             Container(
               child: Stack(
                 children: [
-                  Container(
-                    margin: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                        color: accentYellow,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                              color: mainGrey,
-                              offset: Offset(0.0, 1.0),
-                              blurRadius: 6.0),
-                        ]),
-                    height: 350,
-                    width: 500,
-                    child: PageView(
-                      children: [
-                        //Indicator type A
-                        TweenAnimationBuilder(
-                            tween: Tween(begin: 0.0, end: 1.0),
-                            duration: Duration(seconds: 8),
-                            builder: (context, value, child) {
-                              int typeAData = (value * 100).ceil();
-                              return Container(
-                                height: 300,
-                                width: 500,
-                                child: Stack(
-                                  children: [
-                                    ShaderMask(
-                                      shaderCallback: (rect) {
-                                        return SweepGradient(
-                                          startAngle: 0.0,
-                                          endAngle: 3.14 * 2,
-                                          stops: [value, value],
-                                          center: Alignment.center,
-                                          colors: [
-                                            Colors.greenAccent,
-                                            Colors.grey.withAlpha(200),
-                                          ],
-                                        ).createShader(rect);
-                                      },
-                                      child: Container(
-                                        margin: EdgeInsets.all(30),
-                                        height: 300,
-                                        width: 500,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          //image로 바꿔서 ui 변화 가능.
-                                          image: DecorationImage(
-                                              image: Image.asset(
-                                                      'assets/images/radial_scale.png')
-                                                  .image),
+                  Obx(
+                    () => Container(
+                      margin: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              //카메라 컨트롤러의 selectedImagePath 스트링 값을 가져와 에셋이미지 패스 연결.
+                              image: AssetImage(
+                                  'assets/images/${controller.imagePath}.png')),
+                          color: bgColor,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                                color: mainGrey,
+                                offset: Offset(0.0, 1.0),
+                                blurRadius: 6.0),
+                          ]),
+                      height: 350,
+                      width: 500,
+                      child: PageView(
+                        children: [
+                          //Indicator type A
+                          TweenAnimationBuilder(
+                              tween: Tween(begin: 0.0, end: 1.0),
+                              duration: Duration(seconds: 8),
+                              builder: (context, value, child) {
+                                int typeAData = (value * 100).ceil();
+                                return Container(
+                                  height: 300,
+                                  width: 500,
+                                  child: Stack(
+                                    children: [
+                                      ShaderMask(
+                                        shaderCallback: (rect) {
+                                          return SweepGradient(
+                                            startAngle: 0.0,
+                                            endAngle: 3.14 * 2,
+                                            stops: [value, value],
+                                            center: Alignment.center,
+                                            colors: [
+                                              Colors.greenAccent,
+                                              Colors.grey.withAlpha(200),
+                                            ],
+                                          ).createShader(rect);
+                                        },
+                                        child: Container(
+                                          margin: EdgeInsets.all(30),
+                                          height: 300,
+                                          width: 500,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            //image로 바꿔서 ui 변화 가능.
+                                            image: DecorationImage(
+                                                image: Image.asset(
+                                                        'assets/images/radial_scale.png')
+                                                    .image),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Center(
-                                      child: Container(
-                                        height: 250,
-                                        width: 460,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Center(
-                                          child: Text("$typeAData"),
+                                      Center(
+                                        child: Container(
+                                          height: 250,
+                                          width: 460,
+                                          decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: Center(
+                                            child: Text("$typeAData"),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }),
-                        IndicatorCircularView(),
-                        IndicatorCircularView(),
-                      ],
+                                    ],
+                                  ),
+                                );
+                              }),
+                          IndicatorCircularView(),
+                          IndicatorCircularView(),
+                        ],
+                      ),
                     ),
                   ),
                   Row(
@@ -137,7 +150,7 @@ class WalkView extends GetView<WalkController> {
                         heroTag: 'goToCamera',
                         backgroundColor: accentBrown,
                         onPressed: () {
-                          controller.cameraButtonClicked();
+                          controller.CameraBtnClicked();
                         },
                         child: Icon(Icons.camera),
                       ),
@@ -147,7 +160,7 @@ class WalkView extends GetView<WalkController> {
                       FloatingActionButton.small(
                         backgroundColor: accentBrown,
                         onPressed: () {
-                          WalkController.to.shareBtnClicked();
+                          controller.shareBtnClicked();
                         },
                         child: Icon(Icons.share),
                       ),

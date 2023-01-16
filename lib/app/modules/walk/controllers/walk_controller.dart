@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:get_storage/get_storage.dart';
 
 import 'package:flutter/material.dart';
@@ -8,6 +7,8 @@ import 'package:get/get.dart';
 class WalkController extends GetxController {
   static WalkController get to => Get.find();
   final storage = GetStorage();
+
+  RxString imagePath = '0'.obs;
 
   final isCameraBtnClicked = false.obs;
   final isShareBtnClicked = false.obs;
@@ -21,6 +22,9 @@ class WalkController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    //위젯 시작시 페이지 이미지 데이터 가져옴.
+    initPageIndex();
+    //동시에 만보기 타이머 시작.
     startWalk();
     startPoint();
   }
@@ -33,6 +37,11 @@ class WalkController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  initPageIndex() {
+    imagePath.value = storage.read('mainPageImageIndex');
+    print('init');
   }
 
   shareBtnClicked() {
@@ -59,6 +68,10 @@ class WalkController extends GetxController {
     );
   }
 
+  CameraBtnClicked() {
+    Get.toNamed('/camera');
+  }
+
   late Timer _timer;
 
   void walkTotalUp() {
@@ -75,12 +88,15 @@ class WalkController extends GetxController {
   }
 
   //컨트롤러 init 시 작동되는 함수들.
+  //Duration 주기(1초)마다 총 걸음수와 100걸음 걸음수를 1씩 증가시키고, storage 값을 한번씩 읽음.
   void startWalk() {
     _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
       walkTotal.value++;
       walk100.value++;
-      // print('$walkTotal');
-      // print('$walk100');
+
+      storage.listenKey('mainPageImageIndex', (value) {
+        imagePath.value = storage.read('mainPageImageIndex');
+      });
     });
   }
 
@@ -89,9 +105,5 @@ class WalkController extends GetxController {
       walk100.value -= 100;
       pointCount.value++;
     });
-  }
-
-  cameraButtonClicked() {
-    Get.toNamed('/camera');
   }
 }
