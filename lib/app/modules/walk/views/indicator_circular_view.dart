@@ -13,11 +13,23 @@ class IndicatorCircularView extends GetView<WalkController> {
         children: [
           Center(
             child: SizedBox(
+              width: 250,
+              height: 250,
+              child: CircularProgressIndicator(
+                color: controller.currentWalkColor.value,
+                value: controller.walk100.value.toDouble() /
+                    controller.walk100maxSecond,
+              ),
+            ),
+          ),
+          Center(
+            child: SizedBox(
               width: 300,
               height: 300,
               child: CircularProgressIndicator(
-                value: controller.walk100.value.toDouble() /
-                    controller.walk100maxSecond,
+                color: controller.currentTotalColor.value,
+                value: controller.walkTotal.value.toDouble() /
+                    controller.walkTotalMax.toInt(),
               ),
             ),
           ),
@@ -28,7 +40,9 @@ class IndicatorCircularView extends GetView<WalkController> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('total:${controller.walkTotal}'),
+                    Text(
+                      'total:${controller.walkTotal}',
+                    ),
                     Text('100:${controller.walk100}'),
                     Text('pointTotall:${controller.pointCount}'),
                   ],
