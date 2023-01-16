@@ -1,6 +1,8 @@
 import 'package:cashwalkclone/app/modules/walk/controllers/walk_controller.dart';
+import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -8,8 +10,9 @@ class CameraController extends GetxController {
   WalkController walkController = WalkController();
   final storage = GetStorage();
 
-  Color totalColor = Colors.blue;
-  Color walkColor = Colors.pink;
+  var totalColor = Color(0xFf4169e1).obs;
+  var walkColor = Color(0xFFff69b4).obs;
+  var textColor = Color(0xFFdd972b).obs;
 
   var selectedImagePath = '0'.obs;
 
@@ -30,6 +33,57 @@ class CameraController extends GetxController {
     selectedImagePath.value = galleryPageIndex.value.toString();
     storage.write('mainPageImageIndex', selectedImagePath.value);
     print('write:' + storage.read('mainPageImageIndex'));
+  }
+
+  totalColorChangeBtnClicked() {
+    Get.dialog(
+      AlertDialog(
+        content: ColorPicker(
+          pickerColor: totalColor.value,
+          onColorChanged: (Color color) {
+            totalColor.value = color;
+            print(totalColor.value);
+          },
+          pickerAreaHeightPercent: 0.9,
+          enableAlpha: true,
+          paletteType: PaletteType.hsvWithHue,
+        ),
+      ),
+    );
+  }
+
+  walkColorChangeBtnClicked() {
+    Get.dialog(
+      AlertDialog(
+        content: ColorPicker(
+          pickerColor: walkColor.value,
+          onColorChanged: (Color color) {
+            walkColor.value = color;
+            print(walkColor.value);
+          },
+          pickerAreaHeightPercent: 0.9,
+          enableAlpha: true,
+          paletteType: PaletteType.hsvWithHue,
+        ),
+      ),
+    );
+  }
+
+  textColorChangeBtnClicked() {
+    Get.dialog(
+      AlertDialog(
+        content: ColorPicker(
+          pickerColor: textColor.value,
+          onColorChanged: (Color color) {
+            textColor.value = color;
+            print(textColor.value);
+          },
+          pickerAreaHeightPercent: 0.9,
+          enableAlpha: true,
+          paletteType: PaletteType.hsvWithHue,
+        ),
+      ),
+    );
   }
 
   @override

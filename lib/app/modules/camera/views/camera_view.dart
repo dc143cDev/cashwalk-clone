@@ -81,95 +81,109 @@ class CameraView extends GetView<CameraController> {
                 SizedBox(
                   width: 20,
                 ),
-                Container(
-                  height: 85,
-                  width: 165,
-                  decoration: BoxDecoration(
-                    color: bgColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 5.0,
-                        spreadRadius: 0.0,
-                        offset: Offset(0, 7),
-                      ),
-                    ],
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: CircularProgressIndicator(
-                          color: controller.totalColor,
-                          backgroundColor: bgColor,
-                          strokeWidth: 3,
-                          value: 70 / 100,
+                GestureDetector(
+                  onTap: () {
+                    controller.totalColorChangeBtnClicked();
+                  },
+                  child: Container(
+                    height: 85,
+                    width: 165,
+                    decoration: BoxDecoration(
+                      color: bgColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                          spreadRadius: 0.0,
+                          offset: Offset(0, 7),
                         ),
+                      ],
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        '총 걸음 표시\n색상 선택하기',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12,
-                            fontFamily: 'IBMKR'),
-                      ),
-                    ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 30,
+                          width: 30,
+                          child: Obx(
+                            () => CircularProgressIndicator(
+                              color: controller.totalColor.value,
+                              backgroundColor: bgColor,
+                              strokeWidth: 3,
+                              value: 70 / 100,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          '총 걸음 표시\n색상 선택하기',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
+                              fontFamily: 'IBMKR'),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
                   width: 25,
                 ),
-                Container(
-                  height: 85,
-                  width: 165,
-                  decoration: BoxDecoration(
-                    color: bgColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 5.0,
-                        spreadRadius: 0.0,
-                        offset: Offset(0, 7),
-                      ),
-                    ],
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10),
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 25,
-                        width: 25,
-                        child: CircularProgressIndicator(
-                          color: controller.walkColor,
-                          backgroundColor: bgColor,
-                          strokeWidth: 3,
-                          value: 90 / 100,
+                GestureDetector(
+                  onTap: () {
+                    controller.walkColorChangeBtnClicked();
+                  },
+                  child: Container(
+                    height: 85,
+                    width: 165,
+                    decoration: BoxDecoration(
+                      color: bgColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                          spreadRadius: 0.0,
+                          offset: Offset(0, 7),
                         ),
+                      ],
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Text(
-                        '목표 걸음 표시\n색상 선택하기',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12,
-                            fontFamily: 'IBMKR'),
-                      ),
-                    ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 25,
+                          width: 25,
+                          child: Obx(
+                            () => CircularProgressIndicator(
+                              color: controller.walkColor.value,
+                              backgroundColor: bgColor,
+                              strokeWidth: 3,
+                              value: 90 / 100,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          '목표 걸음 표시\n색상 선택하기',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 12,
+                              fontFamily: 'IBMKR'),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -180,48 +194,55 @@ class CameraView extends GetView<CameraController> {
             SizedBox(
               height: 30,
             ),
-            Container(
-              height: 85,
-              width: 355,
-              decoration: BoxDecoration(
-                color: bgColor,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 5.0,
-                    spreadRadius: 0.0,
-                    offset: Offset(0, 7),
+            GestureDetector(
+              onTap: () {
+                controller.textColorChangeBtnClicked();
+              },
+              child: Container(
+                height: 85,
+                width: 355,
+                decoration: BoxDecoration(
+                  color: bgColor,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 5.0,
+                      spreadRadius: 0.0,
+                      offset: Offset(0, 7),
+                    ),
+                  ],
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
                   ),
-                ],
-                borderRadius: BorderRadius.all(
-                  Radius.circular(10),
                 ),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 30,
-                  ),
-                  Text(
-                    'T',
-                    style: TextStyle(
-                        fontFamily: 'LS',
-                        fontSize: 30,
-                        fontWeight: FontWeight.w700,
-                        color: accentYellow),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    '텍스트\n색상 선택하기',
-                    style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        fontSize: 12,
-                        fontFamily: 'IBMKR'),
-                  ),
-                ],
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 30,
+                    ),
+                    Obx(
+                      () => Text(
+                        'T',
+                        style: TextStyle(
+                            fontFamily: 'LS',
+                            fontSize: 30,
+                            fontWeight: FontWeight.w700,
+                            color: controller.textColor.value),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      '텍스트\n색상 선택하기',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 12,
+                          fontFamily: 'IBMKR'),
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(
@@ -236,8 +257,7 @@ class CameraView extends GetView<CameraController> {
                   child: CustomButtonBrown(
                     btnText: '미리보기',
                     onPressed: () {
-                      controller.applyBtnClicked();
-                      Get.back();
+                      print(controller.totalColor.value);
                     },
                   ),
                 ),
