@@ -24,13 +24,28 @@ migrate_working_dir/
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
+*.yaml
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
+.metadata
 .packages
 .pub-cache/
+lib/firebase_options.dart
 .pub/
 /build/
+android/
+linux/
+macos/
+web/
+windows/
+ios/
+ltwcp.iml
+pubspec.lock
+!pubspec.yaml
+
+# web
+web/firebase-config.js
 
 # Symbolication related
 app.*.symbols
