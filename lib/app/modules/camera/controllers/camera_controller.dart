@@ -1,11 +1,15 @@
 import 'package:cashwalkclone/app/modules/walk/controllers/walk_controller.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 class CameraController extends GetxController {
   WalkController walkController = WalkController();
   final storage = GetStorage();
+
+  Color totalColor = Colors.blue;
+  Color walkColor = Colors.pink;
 
   var selectedImagePath = '0'.obs;
 
