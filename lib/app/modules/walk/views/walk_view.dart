@@ -1,5 +1,5 @@
 import 'package:cashwalkclone/app/modules/camera/controllers/camera_controller.dart';
-import 'package:cashwalkclone/app/modules/walk/views/indicator_circular_view.dart';
+import 'package:cashwalkclone/app/widgets/indicator/indicator_circular_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../palette.dart';
@@ -32,7 +32,7 @@ class WalkView extends GetView<WalkController> {
         actions: [
           IconButton(
             onPressed: () {
-              cameraController.applyBtnClicked();
+              cameraController.read();
             },
             icon: Icon(
               Icons.add_alert,
@@ -41,11 +41,22 @@ class WalkView extends GetView<WalkController> {
           ),
           IconButton(
             onPressed: () {
-              controller.shareBtnClicked();
+              CameraController().debugBtn();
             },
             icon: Icon(
               Icons.settings,
               color: accentYellow,
+            ),
+          ),
+          FloatingActionButton(
+              heroTag: null,
+              onPressed: () {
+                cameraController.count();
+              }),
+          Obx(
+            () => Text(
+              '${cameraController.textInt.value}',
+              style: TextStyle(color: Colors.black),
             ),
           ),
         ],
@@ -83,6 +94,7 @@ class WalkView extends GetView<WalkController> {
                           //Indicator type A
                           IndicatorCircularView(),
                           IndicatorCircularView(),
+                          Center(),
                         ],
                       ),
                     ),

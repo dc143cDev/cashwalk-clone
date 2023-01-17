@@ -9,7 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
 
 import '../../walk/controllers/walk_controller.dart';
-import '../../walk/views/indicator_circular_view.dart';
+import '../../../widgets/indicator/indicator_circular_view.dart';
 import '../controllers/camera_controller.dart';
 
 class CameraView extends GetView<CameraController> {
@@ -30,6 +30,23 @@ class CameraView extends GetView<CameraController> {
               fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
+        actions: [
+          Center(
+            child: Obx(
+              () => Text(
+                controller.galleryPageIndexPlus.value.toString() + '/5',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontFamily: 'IBMKR',
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: 40,
+          ),
+        ],
       ),
       body: Center(
         child: Column(
@@ -111,7 +128,7 @@ class CameraView extends GetView<CameraController> {
                           width: 30,
                           child: Obx(
                             () => CircularProgressIndicator(
-                              color: controller.totalColor.value,
+                              color: controller.selectedTotalColor.value,
                               backgroundColor: bgColor,
                               strokeWidth: 3,
                               value: 70 / 100,
@@ -165,7 +182,7 @@ class CameraView extends GetView<CameraController> {
                           width: 25,
                           child: Obx(
                             () => CircularProgressIndicator(
-                              color: controller.walkColor.value,
+                              color: controller.selectedWalkColor.value,
                               backgroundColor: bgColor,
                               strokeWidth: 3,
                               value: 90 / 100,
@@ -228,7 +245,7 @@ class CameraView extends GetView<CameraController> {
                             fontFamily: 'LS',
                             fontSize: 30,
                             fontWeight: FontWeight.w700,
-                            color: controller.textColor.value),
+                            color: controller.selectedTextColor.value),
                       ),
                     ),
                     SizedBox(
@@ -253,19 +270,7 @@ class CameraView extends GetView<CameraController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 170,
-                  child: CustomButtonBrown(
-                    btnText: '미리보기',
-                    onPressed: () {
-                      print(controller.totalColor.value);
-                    },
-                  ),
-                ),
-                SizedBox(
-                  width: 20,
-                ),
-                SizedBox(
-                  width: 170,
+                  width: 360,
                   child: CustomButtonBrown(
                     btnText: '적용하기',
                     onPressed: () {

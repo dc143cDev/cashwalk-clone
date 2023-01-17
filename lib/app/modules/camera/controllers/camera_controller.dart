@@ -1,6 +1,6 @@
 import 'package:cashwalkclone/app/modules/walk/controllers/walk_controller.dart';
+import 'package:cashwalkclone/app/widgets/custom_button_yellow.dart';
 import 'package:cashwalkclone/palette.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
@@ -9,18 +9,26 @@ import 'package:get_storage/get_storage.dart';
 class CameraController extends GetxController {
   WalkController walkController = WalkController();
   //get storage 사용하기 쉽게 미리 선언.
-  final storage = GetStorage();
+  GetStorage storage = GetStorage();
+
+  var textInt = 0.obs;
 
   //color picker 으로 감지할 색상. 총 걸음수, 100걸음, 텍스트.
-  var totalColor = Color(0xFf4169e1).obs;
-  var walkColor = Color(0xFFff69b4).obs;
-  var textColor = Color(0xFFdd972b).obs;
+  var totalColor = 0xFf4169e1.obs;
+  var walkColor = 0xFFff69b4.obs;
+  var textColor = 0xFFdd972b.obs;
+
+  var selectedTotalColor = Color(0).obs;
+  var selectedWalkColor = Color(0).obs;
+  var selectedTextColor = Color(0).obs;
 
   //현재 선택된 이미지 번호. 에셋 이미지로 0~4까지 다섯개.
   var selectedImagePath = '0'.obs;
 
   //갤러리의 pageView controller 가 감지할 현재 갤러리 번호.
   var galleryPageIndex = 0.obs;
+  //갤러리 표시용. 위 값에서 +1.
+  var galleryPageIndexPlus = 0.obs;
 
   //시작 페이지 0번. 노란 이미지.
   final pageController = PageController(initialPage: 0);
@@ -33,6 +41,7 @@ class CameraController extends GetxController {
     int currentPage = page.toInt();
     //페이지가 바뀔때마다 호출. 즉, galleryPageIndex 가 현재 페이지를 담게 됨.
     galleryPageIndex.value = currentPage;
+    galleryPageIndexPlus.value = currentPage += 1;
     print('main page image path:' + selectedImagePath.value.toString());
     print('current page:' + galleryPageIndex.value.toString());
   }
@@ -48,6 +57,30 @@ class CameraController extends GetxController {
     storage.write('textColor', textColor.value);
 
     print('write:' + storage.read('mainPageImageIndex'));
+    print('write total color:' + storage.read('totalColor').toString());
+    print('write walk color:' + storage.read('walkColor').toString());
+    print('write text color:' + storage.read('textColor').toString());
+  }
+
+  count() {
+    textInt.value++;
+    print(textInt.value);
+    storage.listenKey('test', (value) => print('new key is $value'));
+  }
+
+  read() {
+    storage.read('test');
+    print(textInt.value);
+  }
+
+  debugBtn() {
+    storage.write('test', 'vvv');
+    print(textInt.value);
+    print(textColor);
+    print('write:' + storage.read('mainPageImageIndex'));
+    print('write total color:' + storage.read('totalColor').toString());
+    print('write walk color:' + storage.read('walkColor').toString());
+    print('write text color:' + storage.read('textColor').toString());
   }
 
   //총 걸음 표시 색상 선택시 호출.
@@ -56,15 +89,34 @@ class CameraController extends GetxController {
   totalColorChangeBtnClicked() {
     Get.dialog(
       AlertDialog(
-        content: ColorPicker(
-          pickerColor: totalColor.value,
-          onColorChanged: (Color color) {
-            totalColor.value = color;
-            print(totalColor.value);
-          },
-          pickerAreaHeightPercent: 0.9,
-          enableAlpha: true,
-          paletteType: PaletteType.hsvWithHue,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        content: Column(
+          children: [
+            SizedBox(
+              height: 15,
+            ),
+            ColorPicker(
+              pickerColor: selectedTotalColor.value,
+              onColorChanged: (Color color) {
+                selectedTotalColor.value = color;
+                print(selectedTotalColor.value);
+                totalColor.value = color.value;
+              },
+              pickerAreaHeightPercent: 0.9,
+              enableAlpha: true,
+              paletteType: PaletteType.hsvWithHue,
+            ),
+            SizedBox(
+              height: 70,
+            ),
+            CustomButtonYellow(
+              btnText: '적용하기',
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ],
         ),
       ),
     );
@@ -73,15 +125,35 @@ class CameraController extends GetxController {
   walkColorChangeBtnClicked() {
     Get.dialog(
       AlertDialog(
-        content: ColorPicker(
-          pickerColor: walkColor.value,
-          onColorChanged: (Color color) {
-            walkColor.value = color;
-            print(walkColor.value);
-          },
-          pickerAreaHeightPercent: 0.9,
-          enableAlpha: true,
-          paletteType: PaletteType.hsvWithHue,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        content: Column(
+          children: [
+            SizedBox(
+              height: 15,
+            ),
+            ColorPicker(
+              pickerColor: selectedWalkColor.value,
+              onColorChanged: (Color color) {
+                selectedWalkColor.value = color;
+                //int 로 변환
+                print(color.value);
+                walkColor.value = color.value;
+              },
+              pickerAreaHeightPercent: 0.9,
+              enableAlpha: true,
+              paletteType: PaletteType.hsvWithHue,
+            ),
+            SizedBox(
+              height: 70,
+            ),
+            CustomButtonYellow(
+              btnText: '적용하기',
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ],
         ),
       ),
     );
@@ -90,15 +162,34 @@ class CameraController extends GetxController {
   textColorChangeBtnClicked() {
     Get.dialog(
       AlertDialog(
-        content: ColorPicker(
-          pickerColor: textColor.value,
-          onColorChanged: (Color color) {
-            textColor.value = color;
-            print(textColor.value);
-          },
-          pickerAreaHeightPercent: 0.9,
-          enableAlpha: true,
-          paletteType: PaletteType.hsvWithHue,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        content: Column(
+          children: [
+            SizedBox(
+              height: 15,
+            ),
+            ColorPicker(
+              pickerColor: selectedTextColor.value,
+              onColorChanged: (Color color) {
+                selectedTextColor.value = color;
+                print(selectedTextColor.value);
+                textColor.value = color.value;
+              },
+              pickerAreaHeightPercent: 0.9,
+              enableAlpha: true,
+              paletteType: PaletteType.hsvWithHue,
+            ),
+            SizedBox(
+              height: 70,
+            ),
+            CustomButtonYellow(
+              btnText: '적용하기',
+              onPressed: () {
+                Get.back();
+              },
+            ),
+          ],
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cashwalkclone/app/modules/camera/controllers/camera_controller.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'package:flutter/material.dart';
@@ -13,27 +14,42 @@ class WalkController extends GetxController {
   RxString imagePath = '0'.obs;
 
   //camera controller 쪽에서 넘길 세가지 색상 값을 받아줄 그릇들.
-  var currentTotalColor = Color(0xFf4169e1).obs;
-  var currentWalkColor = Color(0xFFff69b4).obs;
-  var currentTextColor = Color(0xFFdd972b).obs;
+  var currentTotalColor = 0.obs;
+  var currentWalkColor = 0.obs;
+  var currentTextColor = 0.obs;
 
-  //100걸음과 총 걸음수 최대값. 목업이기에 사용하는 것이지, 실제론 이러면 안됨.
+  var initTotalColor = 0xFf4169e1.obs;
+  var initWalkColor = 0xFFff69b4.obs;
+  var initTextColor = 0xFFdd972b.obs;
+
+  //100걸음과 총 걸음수 최대값.
+  // 목업이기에 사용하는 것이지, 실제로는 유저가 맥스값을 설정할수 있게 해야함.
   final walk100maxSecond = 100;
   final walkTotalMax = 1000;
+
+  final walk100maxSecondSplit5 = 20;
+  final walkTotalMaxSplit5 = 200;
 
   //아래 타이머로 변화될 값들. 이 값들이 circular indicator 로 전해져서 ui의 애니메이션처럼 표현.
   RxInt walk100 = 0.obs;
   RxInt walkTotal = 0.obs;
   RxInt pointCount = 0.obs;
+  // /5
+  RxInt walk100s5 = 0.obs;
+  RxInt walkTotals5 = 0.obs;
 
   @override
   void onInit() {
     super.onInit();
     //위젯 시작시 페이지 이미지 및 색상 데이터 가져옴.
     initPageIndex();
+    storage.read('test');
     //동시에 두가지 만보기 타이머 시작.
     startWalk();
     startPoint();
+    // /5
+    startSplit5();
+    startSplit5Cut();
   }
 
   @override
@@ -50,9 +66,30 @@ class WalkController extends GetxController {
   //camera controller 에서 get storage 에 저장한 인덱스 값.
   initPageIndex() {
     imagePath.value = storage.read('mainPageImageIndex');
-    // currentTotalColor.value = storage.read('totalColor');
-    // currentWalkColor.value = storage.read('walkColor');
-    // currentTextColor.value = storage.read('textColor');
+
+    var getTotalColor = storage.read('totalColor');
+
+    if (getTotalColor == null) {
+      currentTotalColor.value = initTotalColor.value;
+    } else {
+      currentTotalColor.value = getTotalColor;
+    }
+
+    var getWalkColor = storage.read('walkColor');
+
+    if (getWalkColor == null) {
+      currentWalkColor.value = initWalkColor.value;
+    } else {
+      currentWalkColor.value = getWalkColor;
+    }
+
+    var getTextColor = storage.read('textColor');
+
+    if (getTextColor == null) {
+      currentTextColor.value = initTextColor.value;
+    } else {
+      currentTextColor.value = getTextColor;
+    }
     print('init');
   }
 
@@ -97,18 +134,34 @@ class WalkController extends GetxController {
       walk100.value++;
 
       storage.listenKey('mainPageImageIndex', (value) {
-        imagePath.value = storage.read('mainPageImageIndex');
+        imagePath.value = value;
       });
 
       storage.listenKey('totalColor', (value) {
-        currentTotalColor.value = storage.read('totalColor');
+        currentTotalColor.value = value;
       });
+
       storage.listenKey('walkColor', (value) {
-        currentWalkColor.value = storage.read('walkColor');
+        currentWalkColor.value = value;
       });
+
       storage.listenKey('textColor', (value) {
-        currentTextColor.value = storage.read('textColor');
+        currentTextColor.value = value;
       });
+    });
+  }
+
+  void startSplit5() {
+    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      walkTotals5.value++;
+      walk100s5.value++;
+    });
+  }
+
+  // /5
+  void startSplit5Cut() {
+    _timer = Timer.periodic(Duration(seconds: 100), (Timer timer) {
+      walk100s5.value -= 20;
     });
   }
 
