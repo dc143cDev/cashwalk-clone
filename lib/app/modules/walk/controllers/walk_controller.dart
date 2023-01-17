@@ -14,16 +14,21 @@ class WalkController extends GetxController {
   RxString imagePath = '0'.obs;
 
   //camera controller 쪽에서 넘길 세가지 색상 값을 받아줄 그릇들.
+  //아래 타이머 위젯으로 1초마다 감지하여 실시간으로 변함.
+  //storage 에 저장될 값은 Color() 가 아닌 int 이기에 우선 0으로 지정.
   var currentTotalColor = 0.obs;
   var currentWalkColor = 0.obs;
   var currentTextColor = 0.obs;
 
+  //순서대로 블루 핑크 옐로우.
+  //아래 initPage 에서 null 값을 체크하여 true 일 경우 반한될 기본 색상.
+  //current~ 컬러들이 int 값이기에, 값을 받아주려면 똑같이 int 여야함. 따라서 int color 값.
   var initTotalColor = 0xFf4169e1.obs;
   var initWalkColor = 0xFFff69b4.obs;
   var initTextColor = 0xFFdd972b.obs;
 
   //100걸음과 총 걸음수 최대값.
-  // 목업이기에 사용하는 것이지, 실제로는 유저가 맥스값을 설정할수 있게 해야함.
+  //목업이기에 사용하는 것이지, 실제로는 유저가 맥스값을 설정할수 있게 해야함.
   final walk100maxSecond = 100;
   final walkTotalMax = 1000;
 
@@ -64,6 +69,7 @@ class WalkController extends GetxController {
 
   //위에서 호출한 메소드. 이미지 인덱스를 get storage 에서 읽어옴.
   //camera controller 에서 get storage 에 저장한 인덱스 값.
+  //storage 의 값들을 체크하여 값이 null 일 경우 기본 값으로 저장한 값들로 변경.
   initPageIndex() {
     imagePath.value = storage.read('mainPageImageIndex');
 

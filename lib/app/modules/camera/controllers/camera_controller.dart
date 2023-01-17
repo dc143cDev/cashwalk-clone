@@ -13,11 +13,13 @@ class CameraController extends GetxController {
 
   var textInt = 0.obs;
 
-  //color picker 으로 감지할 색상. 총 걸음수, 100걸음, 텍스트.
+  //블루 핑크 옐로우. 0으로 해도 상관은 없음. storage 에 저장될 색상.
+  //int 값이어야 storage 에 저장할수 있기에, Color 위젯이 아닌 int 로 표기함.
   var totalColor = 0xFf4169e1.obs;
   var walkColor = 0xFFff69b4.obs;
   var textColor = 0xFFdd972b.obs;
 
+  //color picker 가 감지할 색상.
   var selectedTotalColor = Color(0).obs;
   var selectedWalkColor = Color(0).obs;
   var selectedTextColor = Color(0).obs;
@@ -51,6 +53,7 @@ class CameraController extends GetxController {
   //그리고 저장해야할 값들(페이지 인덱스 스트링 값, 세가지 컬러 값)을 get storage 에 저장.
   applyBtnClicked() {
     selectedImagePath.value = galleryPageIndex.value.toString();
+    //storage 에 페이지 인덱스와 컬러 값들 저장. Color 값은 받을수 없으므로 int 로 변환하여 저장.
     storage.write('mainPageImageIndex', selectedImagePath.value);
     storage.write('totalColor', totalColor.value);
     storage.write('walkColor', walkColor.value);
@@ -83,9 +86,11 @@ class CameraController extends GetxController {
     print('write text color:' + storage.read('textColor').toString());
   }
 
-  //총 걸음 표시 색상 선택시 호출.
+  //표시 색상 선택시 호출.
   //color picker 패키를 사용하여 색상 정해줌. 기본 컬러는 총 걸음 표시 색상. 바뀌면 함께 바뀜.
   //onColorChanged 로 색상이 바뀔때마다 Color 형태로 값을 저장. 아래 두 메소드도 작동방식 동일.
+  //color 인자의 Color.value 로 int 색상 값을 추출.
+  //인자값으로 존재하는 color.value 를 활용하여 변수에 컬러 값을 int 로 받아옴.
   totalColorChangeBtnClicked() {
     Get.dialog(
       AlertDialog(
@@ -136,7 +141,6 @@ class CameraController extends GetxController {
               pickerColor: selectedWalkColor.value,
               onColorChanged: (Color color) {
                 selectedWalkColor.value = color;
-                //int 로 변환
                 print(color.value);
                 walkColor.value = color.value;
               },
