@@ -5,6 +5,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+//--사이클--
+//Controller 빌드 시 onInit 실행=>
+//onInit 으로 initPageValue 함수, startWalk 함수 호출=>
+//if 문으로 storage 값이 존재할시 그대로 적용하고, null 이라면 기본 색상 및 기본 인덱스 적용=>
+//동시에 startWalk 실행됨=>
+//초마다 포인트 상승. 초마다 storage 의 value 를 listenKey 로 감지=>
+//CameraController 에서 storage 의 value 를 수정하면 즉각 적용.
 class WalkController extends GetxController {
   static WalkController get to => Get.find();
   //get storage 사용하기 쉽게 미리 선언.
@@ -47,7 +54,7 @@ class WalkController extends GetxController {
   void onInit() {
     super.onInit();
     //위젯 시작시 페이지 이미지 및 색상 데이터 가져옴.
-    initPageIndex();
+    initPageValue();
     storage.read('test');
     //동시에 두가지 만보기 타이머 시작.
     startWalk();
@@ -70,7 +77,7 @@ class WalkController extends GetxController {
   //위에서 호출한 메소드. 이미지 인덱스를 get storage 에서 읽어옴.
   //camera controller 에서 get storage 에 저장한 인덱스 값.
   //storage 의 값들을 체크하여 값이 null 일 경우 기본 값으로 저장한 값들로 변경.
-  initPageIndex() {
+  initPageValue() {
     imagePath.value = storage.read('mainPageImageIndex');
 
     var getTotalColor = storage.read('totalColor');

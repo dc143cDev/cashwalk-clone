@@ -6,6 +6,10 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+//--사이클--
+//각 UI 에 할당된 세 가지 color picker 로 색상 변경=>
+//color picker 의 onColorChanged 로 각 값에 할당된 selectedColor 를 int color 값으로 반환함=>
+//UI 에서 적용하기 버튼을 누르면 applyBtnClicked 함수가 호출되어 storage 에 세 가지 int color 값 저장=>
 class CameraController extends GetxController {
   WalkController walkController = WalkController();
   //get storage 사용하기 쉽게 미리 선언.
