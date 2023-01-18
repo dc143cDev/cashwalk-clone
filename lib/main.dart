@@ -1,4 +1,5 @@
 import 'package:cashwalkclone/app/modules/camera/controllers/camera_controller.dart';
+import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ Future main() async {
   print(GetStorage().read('test'));
   runApp(
     GetMaterialApp(
+      theme: ThemeData(backgroundColor: bgColor),
       debugShowCheckedModeBanner: false,
       title: "Application",
       initialRoute: AppPages.INITIAL,

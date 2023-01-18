@@ -126,13 +126,11 @@ class CameraView extends GetView<CameraController> {
                         SizedBox(
                           height: 30,
                           width: 30,
-                          child: Obx(
-                            () => CircularProgressIndicator(
-                              color: controller.selectedTotalColor.value,
-                              backgroundColor: bgColor,
-                              strokeWidth: 3,
-                              value: 70 / 100,
-                            ),
+                          child: CircularProgressIndicator(
+                            color: Color(controller.storage.read('totalColor')),
+                            backgroundColor: bgColor,
+                            strokeWidth: 3,
+                            value: 70 / 100,
                           ),
                         ),
                         SizedBox(
@@ -180,13 +178,11 @@ class CameraView extends GetView<CameraController> {
                         SizedBox(
                           height: 25,
                           width: 25,
-                          child: Obx(
-                            () => CircularProgressIndicator(
-                              color: controller.selectedWalkColor.value,
-                              backgroundColor: bgColor,
-                              strokeWidth: 3,
-                              value: 90 / 100,
-                            ),
+                          child: CircularProgressIndicator(
+                            color: Color(controller.storage.read('walkColor')),
+                            backgroundColor: bgColor,
+                            strokeWidth: 3,
+                            value: 90 / 100,
                           ),
                         ),
                         SizedBox(
@@ -238,15 +234,13 @@ class CameraView extends GetView<CameraController> {
                     SizedBox(
                       width: 30,
                     ),
-                    Obx(
-                      () => Text(
-                        'T',
-                        style: TextStyle(
-                            fontFamily: 'LS',
-                            fontSize: 30,
-                            fontWeight: FontWeight.w700,
-                            color: controller.selectedTextColor.value),
-                      ),
+                    Text(
+                      'T',
+                      style: TextStyle(
+                          fontFamily: 'LS',
+                          fontSize: 30,
+                          fontWeight: FontWeight.w700,
+                          color: Color(controller.storage.read('textColor'))),
                     ),
                     SizedBox(
                       width: 20,

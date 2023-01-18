@@ -14,16 +14,6 @@ class IndicatorCircularView extends GetView<WalkController> {
     return Obx(
       () => Stack(
         children: [
-          // Center(
-          //   child: SizedBox(
-          //     width: 200,
-          //     height: 200,
-          //     child: CircularStepProgressIndicator(
-          //       totalSteps: controller.walk100maxSecondSplit5,
-          //       currentStep: controller.walk100s5.value,
-          //     ),
-          //   ),
-          // ),
           Center(
             child: SizedBox(
               width: 250,
@@ -61,16 +51,7 @@ class IndicatorCircularView extends GetView<WalkController> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        '총 걸음 수\n   ${controller.walkTotal}',
-                        style: TextStyle(
-                          fontFamily: 'IBMKR',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: Color(controller.currentTextColor.value),
-                        ),
-                      ),
-                      Text(
-                        '오늘의 목표\n    ${controller.walk100}/100',
+                        '   ${controller.walkTotal}\n 걸음',
                         style: TextStyle(
                           fontFamily: 'IBMKR',
                           fontSize: 18,
@@ -80,6 +61,18 @@ class IndicatorCircularView extends GetView<WalkController> {
                       ),
                       SizedBox(
                         height: 10,
+                      ),
+                      Text(
+                        '         ${controller.walk100}/100\n 다음 포인트까지',
+                        style: TextStyle(
+                          fontFamily: 'IBMKR',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          color: Color(controller.currentTextColor.value),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
                       ),
                       Text(
                         '${controller.pointCount} Cash',

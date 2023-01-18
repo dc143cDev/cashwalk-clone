@@ -106,7 +106,7 @@ class CameraController extends GetxController {
               height: 15,
             ),
             ColorPicker(
-              pickerColor: selectedTotalColor.value,
+              pickerColor: Color(storage.read('totalColor')),
               onColorChanged: (Color color) {
                 selectedTotalColor.value = color;
                 print(selectedTotalColor.value);
@@ -142,7 +142,7 @@ class CameraController extends GetxController {
               height: 15,
             ),
             ColorPicker(
-              pickerColor: selectedWalkColor.value,
+              pickerColor: Color(storage.read('walkColor')),
               onColorChanged: (Color color) {
                 selectedWalkColor.value = color;
                 print(color.value);
@@ -178,7 +178,7 @@ class CameraController extends GetxController {
               height: 15,
             ),
             ColorPicker(
-              pickerColor: selectedTextColor.value,
+              pickerColor: Color(storage.read('textColor')),
               onColorChanged: (Color color) {
                 selectedTextColor.value = color;
                 print(selectedTextColor.value);

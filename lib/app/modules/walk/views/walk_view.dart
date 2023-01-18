@@ -1,8 +1,11 @@
 import 'package:cashwalkclone/app/modules/camera/controllers/camera_controller.dart';
 import 'package:cashwalkclone/app/widgets/indicator/indicator_circular_view.dart';
+import 'package:cashwalkclone/app/widgets/indicator/indicator_step_b_view.dart';
+import 'package:cashwalkclone/app/widgets/indicator/indicator_step_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../palette.dart';
+import '../../../widgets/indicator/indicator_circular_b_view.dart';
 import '../controllers/walk_controller.dart';
 import 'package:get/get.dart';
 
@@ -48,17 +51,6 @@ class WalkView extends GetView<WalkController> {
               color: accentYellow,
             ),
           ),
-          FloatingActionButton(
-              heroTag: null,
-              onPressed: () {
-                cameraController.count();
-              }),
-          Obx(
-            () => Text(
-              '${cameraController.textInt.value}',
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -90,11 +82,14 @@ class WalkView extends GetView<WalkController> {
                       height: 350,
                       width: 500,
                       child: PageView(
+                        controller: controller.indicatorController,
+                        onPageChanged: controller.onIndicatorPageChanged,
                         children: [
                           //Indicator type A
                           IndicatorCircularView(),
-                          IndicatorCircularView(),
-                          Center(),
+                          IndicatorStepView(),
+                          IndicatorCircularBView(),
+                          IndicatorStepBView(),
                         ],
                       ),
                     ),

@@ -39,8 +39,14 @@ class WalkController extends GetxController {
   final walk100maxSecond = 100;
   final walkTotalMax = 1000;
 
+  //인디케이터 index
+  var indicatorIndex = 0.obs;
+  var currentIndicator = 0.obs;
+
   final walk100maxSecondSplit5 = 20;
-  final walkTotalMaxSplit5 = 200;
+  final walkTotalMaxSplit5 = 30;
+
+  final indicatorController = PageController(initialPage: 0, keepPage: true);
 
   //아래 타이머로 변화될 값들. 이 값들이 circular indicator 로 전해져서 ui의 애니메이션처럼 표현.
   RxInt walk100 = 0.obs;
@@ -61,6 +67,7 @@ class WalkController extends GetxController {
     startPoint();
     // /5
     startSplit5();
+    startSplitTotal5();
     startSplit5Cut();
   }
 
@@ -106,6 +113,14 @@ class WalkController extends GetxController {
     print('init');
   }
 
+  onIndicatorPageChanged(int page) {
+    print('page num:' + page.toString());
+    int currentIndicator = page.toInt();
+    //페이지가 바뀔때마다 호출. 즉, galleryPageIndex 가 현재 페이지를 담게 됨.
+    indicatorIndex.value = currentIndicator;
+    print(currentIndicator);
+  }
+
   //공유 버튼 클릭시 호출.
   shareBtnClicked() {
     Get.bottomSheet(
@@ -146,6 +161,8 @@ class WalkController extends GetxController {
       walkTotal.value++;
       walk100.value++;
 
+      storage.write('indicatorIndex', indicatorIndex.value);
+
       storage.listenKey('mainPageImageIndex', (value) {
         imagePath.value = value;
       });
@@ -166,8 +183,14 @@ class WalkController extends GetxController {
 
   void startSplit5() {
     _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
-      walkTotals5.value++;
       walk100s5.value++;
+    });
+  }
+
+  //1000/1 / 30
+  void startSplitTotal5() {
+    _timer = Timer.periodic(Duration(seconds: 33), (Timer timer) {
+      walkTotals5.value++;
     });
   }
 
