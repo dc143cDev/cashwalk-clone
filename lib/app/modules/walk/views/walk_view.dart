@@ -85,7 +85,7 @@ class WalkView extends GetView<WalkController> {
                         controller: controller.indicatorController,
                         onPageChanged: controller.onIndicatorPageChanged,
                         children: [
-                          //Indicator type A
+                          //Indicator
                           IndicatorCircularView(),
                           IndicatorStepView(),
                           IndicatorCircularBView(),

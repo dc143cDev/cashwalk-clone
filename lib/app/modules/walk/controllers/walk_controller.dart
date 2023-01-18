@@ -32,7 +32,7 @@ class WalkController extends GetxController {
   //current~ 컬러들이 int 값이기에, 값을 받아주려면 똑같이 int 여야함. 따라서 int color 값.
   var initTotalColor = 0xFf4169e1.obs;
   var initWalkColor = 0xFFff69b4.obs;
-  var initTextColor = 0xFFdd972b.obs;
+  var initTextColor = 0xffffffff.obs;
 
   //100걸음과 총 걸음수 최대값.
   //목업이기에 사용하는 것이지, 실제로는 유저가 맥스값을 설정할수 있게 해야함.

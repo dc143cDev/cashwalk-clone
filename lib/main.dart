@@ -17,7 +17,6 @@ Future main() async {
   print(GetStorage().read('test'));
   runApp(
     GetMaterialApp(
-      theme: ThemeData(backgroundColor: bgColor),
       debugShowCheckedModeBanner: false,
       title: "Application",
       initialRoute: AppPages.INITIAL,

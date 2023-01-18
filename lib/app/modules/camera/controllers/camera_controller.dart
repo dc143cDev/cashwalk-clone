@@ -21,7 +21,7 @@ class CameraController extends GetxController {
   //int 값이어야 storage 에 저장할수 있기에, Color 위젯이 아닌 int 로 표기함.
   var totalColor = 0xFf4169e1.obs;
   var walkColor = 0xFFff69b4.obs;
-  var textColor = 0xFFdd972b.obs;
+  var textColor = 0xffffffff.obs;
 
   //color picker 가 감지할 색상.
   var selectedTotalColor = Color(0).obs;
