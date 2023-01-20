@@ -24,6 +24,7 @@ class FriendsView extends GetView<FriendsController> {
     FriendsDialController friendsDialController = FriendsDialController();
 
     return Scaffold(
+      backgroundColor: bgColor,
       floatingActionButton: SpeedDial(
         openCloseDial: friendsDialController.isDialOpen,
         onOpen: () {},

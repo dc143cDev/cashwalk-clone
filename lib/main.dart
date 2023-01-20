@@ -19,6 +19,7 @@ Future main() async {
   runApp(
     GetMaterialApp(
       theme: ThemeData(
+        backgroundColor: bgColor,
         textTheme: TextTheme(
           bodyText2: TextStyle(
               fontWeight: FontWeight.w600,

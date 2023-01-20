@@ -1,3 +1,5 @@
+import 'package:cashwalkclone/app/widgets/custom_button_brown.dart';
+import 'package:cashwalkclone/app/widgets/custom_button_yellow.dart';
 import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +35,7 @@ class FriendsDialController extends GetxController
   isAddBtnClicked() {
     Get.dialog(
       CustomDialog(
-        titleText: '친구 추가하기',
+        titleText: '  친구 추가하기',
         dialogContent: Column(
           children: [
             Row(
@@ -81,6 +83,32 @@ class FriendsDialController extends GetxController
                   ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Text(
+              '친구하고 싶은 사용자를 추천코드로 검색합니다.\n            이미 친구인 사용자를 검색하고\n        싶다면 아래의 버튼을 선택해주세요',
+              style: TextStyle(fontSize: 13, color: Colors.grey.shade700),
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            CustomButtonYellow(
+              btnText: '친구 검색하러 가기',
+              onPressed: () {},
+            ),
+            SizedBox(
+              height: 250,
+            ),
+            SizedBox(
+              width: 250,
+              child: CustomButtonBrown(
+                btnText: '확인',
+                onPressed: () {
+                  Get.back();
+                },
+              ),
             ),
           ],
         ),
