@@ -1,5 +1,6 @@
 import 'package:cashwalkclone/app/modules/walk/controllers/walk_controller.dart';
 import 'package:cashwalkclone/app/widgets/custom_button_yellow.dart';
+import 'package:cashwalkclone/app/widgets/custom_dialog.dart';
 import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -97,10 +98,9 @@ class CameraController extends GetxController {
   //인자값으로 존재하는 color.value 를 활용하여 변수에 컬러 값을 int 로 받아옴.
   totalColorChangeBtnClicked() {
     Get.dialog(
-      AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15.0))),
-        content: Column(
+      CustomDialog(
+        titleText: '걸음 색상 선택하기',
+        dialogContent: Column(
           children: [
             SizedBox(
               height: 15,
@@ -133,10 +133,9 @@ class CameraController extends GetxController {
 
   walkColorChangeBtnClicked() {
     Get.dialog(
-      AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15.0))),
-        content: Column(
+      CustomDialog(
+        titleText: '목표 걸음 색상 선택하기',
+        dialogContent: Column(
           children: [
             SizedBox(
               height: 15,
@@ -169,10 +168,9 @@ class CameraController extends GetxController {
 
   textColorChangeBtnClicked() {
     Get.dialog(
-      AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(15.0))),
-        content: Column(
+      CustomDialog(
+        titleText: '텍스트 색상 선택하기',
+        dialogContent: Column(
           children: [
             SizedBox(
               height: 15,

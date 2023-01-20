@@ -5,6 +5,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../widgets/custom_button_yellow.dart';
+
 //--사이클--
 //Controller 빌드 시 onInit 실행=>
 //onInit 으로 initPageValue 함수, startWalk 함수 호출=>
@@ -27,9 +29,12 @@ class WalkController extends GetxController {
   var currentWalkColor = 0.obs;
   var currentTextColor = 0.obs;
 
+  var dialogNeverSeenAgain = false.obs;
+
   //순서대로 블루 핑크 옐로우.
   //아래 initPage 에서 null 값을 체크하여 true 일 경우 반한될 기본 색상.
   //current~ 컬러들이 int 값이기에, 값을 받아주려면 똑같이 int 여야함. 따라서 int color 값.
+  var initPoint = 0.obs;
   var initTotalColor = 0xFf4169e1.obs;
   var initWalkColor = 0xFFff69b4.obs;
   var initTextColor = 0xffffffff.obs;
@@ -51,7 +56,7 @@ class WalkController extends GetxController {
   //아래 타이머로 변화될 값들. 이 값들이 circular indicator 로 전해져서 ui의 애니메이션처럼 표현.
   RxInt walk100 = 0.obs;
   RxInt walkTotal = 0.obs;
-  RxInt pointCount = 0.obs;
+  var pointCount = 0.obs;
   // /5
   RxInt walk100s5 = 0.obs;
   RxInt walkTotals5 = 0.obs;
@@ -61,6 +66,7 @@ class WalkController extends GetxController {
     super.onInit();
     //위젯 시작시 페이지 이미지 및 색상 데이터 가져옴.
     initPageValue();
+
     storage.read('test');
     //동시에 두가지 만보기 타이머 시작.
     startWalk();
@@ -74,6 +80,7 @@ class WalkController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    initDialog();
   }
 
   @override
@@ -86,6 +93,14 @@ class WalkController extends GetxController {
   //storage 의 값들을 체크하여 값이 null 일 경우 기본 값으로 저장한 값들로 변경.
   initPageValue() {
     imagePath.value = storage.read('mainPageImageIndex');
+
+    var getPoint = storage.read('cash');
+
+    if (getPoint == 0) {
+      pointCount.value = initPoint.value;
+    } else {
+      pointCount.value = getPoint;
+    }
 
     var getTotalColor = storage.read('totalColor');
 
@@ -111,6 +126,39 @@ class WalkController extends GetxController {
       currentTextColor.value = getTextColor;
     }
     print('init');
+  }
+
+  initDialog() {
+    Get.dialog(
+      AlertDialog(
+        content: Column(
+          children: [
+            Container(
+              height: 200,
+            ),
+            Row(
+              children: [
+                CustomButtonYellow(
+                  btnText: '확인',
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                CustomButtonYellow(
+                  btnText: '확인',
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   onIndicatorPageChanged(int page) {
@@ -163,6 +211,8 @@ class WalkController extends GetxController {
 
       storage.write('indicatorIndex', indicatorIndex.value);
 
+      storage.write('cash', pointCount.value);
+
       storage.listenKey('mainPageImageIndex', (value) {
         imagePath.value = value;
       });
@@ -207,6 +257,7 @@ class WalkController extends GetxController {
     _timer = Timer.periodic(Duration(seconds: 100), (Timer timer) {
       walk100.value -= 100;
       pointCount.value++;
+      storage.write('cash', pointCount.value);
     });
   }
 }

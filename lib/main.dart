@@ -15,8 +15,17 @@ Future main() async {
   await GetStorage().read('textColor');
   print(GetStorage().read('totalColor').toString());
   print(GetStorage().read('test'));
+  print(GetStorage().read('cash'));
   runApp(
     GetMaterialApp(
+      theme: ThemeData(
+        textTheme: TextTheme(
+          bodyText2: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontFamily: 'IBMKR',
+              color: textDark),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
       title: "Application",
       initialRoute: AppPages.INITIAL,

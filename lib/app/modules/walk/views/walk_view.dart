@@ -1,4 +1,6 @@
 import 'package:cashwalkclone/app/modules/camera/controllers/camera_controller.dart';
+import 'package:cashwalkclone/app/modules/quiz/views/quiz_widget_view.dart';
+import 'package:cashwalkclone/app/modules/shopping/views/shopping_widget_view.dart';
 import 'package:cashwalkclone/app/widgets/indicator/indicator_circular_view.dart';
 import 'package:cashwalkclone/app/widgets/indicator/indicator_step_b_view.dart';
 import 'package:cashwalkclone/app/widgets/indicator/indicator_step_view.dart';
@@ -108,17 +110,92 @@ class WalkView extends GetView<WalkController> {
                         child: Icon(Icons.camera),
                       ),
                       SizedBox(
-                        width: 265,
-                      ),
-                      FloatingActionButton.small(
-                        backgroundColor: accentBrown,
-                        onPressed: () {
-                          controller.shareBtnClicked();
-                        },
-                        child: Icon(Icons.share),
+                        width: 305,
                       ),
                     ],
                   ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 7,
+            ),
+            ShoppingWidgetView(),
+            SizedBox(
+              height: 7,
+            ),
+            QuizWidgetView(),
+            SizedBox(
+              height: 7,
+            ),
+            Padding(
+              padding: EdgeInsets.all(13),
+              child: Stack(
+                children: [
+                  Container(
+                    height: 240,
+                    decoration: BoxDecoration(
+                      color: bgColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                          spreadRadius: 0.0,
+                          offset: Offset(0, 7),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(22),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 108, 8, 8),
+                      child: Row(
+                        children: [
+                          Text('data'),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                      color: accentPapaya,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey,
+                          blurRadius: 5.0,
+                          spreadRadius: 0.0,
+                          offset: Offset(0, 7),
+                        ),
+                      ],
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        FloatingActionButton(
+                          onPressed: () {},
+                          backgroundColor: bgColor,
+                          child: Icon(
+                            Icons.play_arrow,
+                            color: accentPapaya,
+                            size: 40,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 230,
+                          child: LinearProgressIndicator(
+                            value: 10 / 100,
+                            color: bgColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),

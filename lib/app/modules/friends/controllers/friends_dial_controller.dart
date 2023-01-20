@@ -1,0 +1,138 @@
+import 'package:cashwalkclone/palette.dart';
+import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../widgets/custom_dialog.dart';
+
+class FriendsDialController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  //초기값이 없어 발생하는 빌드 오류를 막기 위해 초기값을 미리 선언.
+  //왜인지 onInit 에 넣었을때는 작동하지 않았음. 확인 필요.
+  late AnimationController animationController =
+      AnimationController(vsync: this, duration: Duration(seconds: 1));
+
+  //speed dial 버튼 클릭시 감지 노티파이어.
+  //애니메이션과 무관. 다이알 올라오는 기능 감지용.
+  ValueNotifier<bool> isDialOpen = ValueNotifier(false);
+
+  var isPlaying = false.obs;
+
+  //다이알 버튼 클릭시 선언된 애니메이션 컨트롤러 작동. 동시에 다이알 올라옴.
+  isDialBtnClicked() {
+    isDialOpen.value = true;
+    animationController.forward();
+  }
+
+  //다이알 버튼 종료시 애니메이션 닫힘. 동시에 다이알 내려옴.
+  isDialBtnClosed() {
+    isDialOpen.value = false;
+    animationController.reverse();
+  }
+
+  isAddBtnClicked() {
+    Get.dialog(
+      CustomDialog(
+        titleText: '친구 추가하기',
+        dialogContent: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 8,
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(color: accentYellow)),
+                      focusColor: accentYellow,
+                      fillColor: Colors.grey,
+                      hintText: '추천코드로 친구를 찾아보세요',
+                      hintStyle: TextStyle(
+                        fontSize: 16,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Expanded(
+                  flex: 2,
+                  child: SizedBox(
+                    height: 55,
+                    width: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: accentYellow,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Icon(Icons.search),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  isSearchBtnClicked() {
+    Get.dialog(
+      CustomDialog(
+        titleText: '친구 검색하기',
+        dialogContent: Column(
+          children: [],
+        ),
+      ),
+    );
+  }
+
+  isControlBtnClicked() {
+    Get.dialog(
+      CustomDialog(
+        titleText: '친구 관리하기',
+        dialogContent: Column(
+          children: [],
+        ),
+      ),
+    );
+  }
+
+  isSNSBtnClicked() {
+    Get.dialog(
+      CustomDialog(
+        titleText: 'SNS 연동하기',
+        dialogContent: Column(
+          children: [],
+        ),
+      ),
+    );
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+  }
+}
