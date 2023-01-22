@@ -41,18 +41,29 @@ class FriendsInviteView extends GetView<FriendsController> {
               ),
             ),
             SizedBox(
-              height: 50,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: SizedBox(
-                width: 240,
-                height: 260,
-                child: Image.asset('assets/images/Subject.png'),
-              ),
-            ),
-            SizedBox(
               height: 10,
+            ),
+            Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(18.0),
+                  child: SizedBox(
+                    width: 240,
+                    height: 260,
+                    child: Image.asset('assets/images/Subject.png'),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 270, 30, 0),
+                  child: SizedBox(
+                    width: 370,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Row(),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
