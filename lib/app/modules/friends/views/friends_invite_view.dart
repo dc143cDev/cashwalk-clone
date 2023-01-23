@@ -57,9 +57,28 @@ class FriendsInviteView extends GetView<FriendsController> {
                   padding: const EdgeInsets.fromLTRB(30, 270, 30, 0),
                   child: SizedBox(
                     width: 370,
+                    height: 60,
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        side: BorderSide(color: Colors.grey, width: 1),
+                        backgroundColor: bgColor,
+                      ),
                       onPressed: () {},
-                      child: Row(),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            '내 추천코드',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
