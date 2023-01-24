@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/widgets/custom_button_yellow.dart';
 import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/material.dart';
 
@@ -43,6 +44,7 @@ class FriendsInviteView extends GetView<FriendsController> {
             SizedBox(
               height: 10,
             ),
+            //에셋 이미지 + 추천코드
             Stack(
               children: [
                 Padding(
@@ -77,12 +79,90 @@ class FriendsInviteView extends GetView<FriendsController> {
                             '내 추천코드',
                             style: TextStyle(color: Colors.grey),
                           ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            '추천코드 데이터',
+                            style: TextStyle(
+                                color: textDark,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'IBMKR',
+                                fontSize: 16),
+                          ),
+                          SizedBox(
+                            width: 60,
+                          ),
+                          SizedBox(
+                            width: 15,
+                            height: 23,
+                            child: Icon(
+                              Icons.paste,
+                              color: textDark,
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
                 ),
               ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            //친구에게 공유하기 버튼
+            Center(
+              child: SizedBox(
+                width: 330,
+                child: CustomButtonYellow(
+                  onPressed: () {},
+                  btnText: '친구에게 공유하기',
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 50,
+                ),
+                Text(
+                  '가입한 친구',
+                  style: TextStyle(
+                    color: textDark,
+                    fontSize: 14,
+                  ),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  'N명',
+                  style: TextStyle(
+                      fontSize: 17,
+                      color: textDark,
+                      fontFamily: 'IBMKR',
+                      fontWeight: FontWeight.w600),
+                ),
+                SizedBox(
+                  width: 15,
+                ),
+                Text(
+                  '(최대 20명)',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 70,
             ),
           ],
         ),

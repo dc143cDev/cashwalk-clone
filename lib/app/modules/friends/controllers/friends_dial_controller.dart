@@ -1,7 +1,6 @@
 import 'package:cashwalkclone/app/widgets/custom_button_brown.dart';
 import 'package:cashwalkclone/app/widgets/custom_button_yellow.dart';
 import 'package:cashwalkclone/palette.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -131,17 +130,6 @@ class FriendsDialController extends GetxController
     Get.dialog(
       CustomDialog(
         titleText: '친구 관리하기',
-        dialogContent: Column(
-          children: [],
-        ),
-      ),
-    );
-  }
-
-  isSNSBtnClicked() {
-    Get.dialog(
-      CustomDialog(
-        titleText: 'SNS 연동하기',
         dialogContent: Column(
           children: [],
         ),

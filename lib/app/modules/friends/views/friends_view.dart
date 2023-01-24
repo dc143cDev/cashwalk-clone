@@ -26,8 +26,10 @@ class FriendsView extends GetView<FriendsController> {
     return Scaffold(
       backgroundColor: bgColor,
       floatingActionButton: SpeedDial(
+        //dial 오픈 시 작동
         openCloseDial: friendsDialController.isDialOpen,
         onOpen: () {},
+        //dial 클로즈 시 작동
         onClose: () {
           friendsDialController.isDialBtnClosed();
         },
@@ -36,6 +38,7 @@ class FriendsView extends GetView<FriendsController> {
         },
         child: AnimatedIcon(
           icon: AnimatedIcons.menu_close,
+          // 애니메이션 프로그레스.
           progress: friendsDialController.animationController,
         ),
         backgroundColor: accentYellow,
@@ -69,15 +72,6 @@ class FriendsView extends GetView<FriendsController> {
               onTap: () {
                 friendsDialController.isControlBtnClicked();
               }),
-          SpeedDialChild(
-              child: Icon(
-                Icons.share,
-                color: accentBrown,
-              ),
-              label: 'SNS 연동',
-              onTap: () {
-                friendsDialController.isSNSBtnClicked();
-              }),
         ],
       ),
       appBar: AppBar(
@@ -88,7 +82,7 @@ class FriendsView extends GetView<FriendsController> {
           tabs: controller.myTabs,
         ),
         title: Text(
-          'Cash Walk',
+          'Walk',
           style: TextStyle(
               fontFamily: 'LS',
               fontSize: 30,
