@@ -10,6 +10,7 @@ class CommunityView extends GetView<CommunityController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bgColor,
       appBar: AppBar(
         title: Text(
           'Cash Walk',

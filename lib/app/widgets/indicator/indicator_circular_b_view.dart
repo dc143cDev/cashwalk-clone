@@ -36,7 +36,7 @@ class IndicatorCircularBView extends GetView<WalkController> {
                       ),
                       Center(
                         child: Text(
-                          ' ${controller.walkTotal}\n  걸음',
+                          ' ${controller.walkTotal}\n 걸음',
                           style: TextStyle(
                             fontFamily: 'IBMKR',
                             fontSize: 18,

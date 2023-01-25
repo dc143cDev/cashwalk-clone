@@ -1,3 +1,5 @@
+import 'package:cashwalkclone/app/modules/coupon/views/coupon_view.dart';
+import 'package:cashwalkclone/app/modules/shopping/views/shopping_view.dart';
 import 'package:cashwalkclone/app/modules/walk/controllers/walk_controller.dart';
 import 'package:cashwalkclone/app/modules/walk/views/walk_view.dart';
 import 'package:flutter/material.dart';
@@ -32,9 +34,20 @@ class ShoppingWidgetView extends GetView<WalkController> {
             ),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(8, 108, 8, 8),
-              child: Row(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('data'),
+                  Text(
+                    '내가 최근에 구매한 상품',
+                    style: TextStyle(color: Colors.grey.shade400),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('data'),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -85,16 +98,38 @@ class ShoppingWidgetView extends GetView<WalkController> {
                   ),
                 ),
                 SizedBox(
-                  width: 170,
+                  width: 13,
                 ),
-                Text(
-                  '내 쿠폰함',
-                  style: TextStyle(
-                    fontFamily: 'IBMKR',
-                    fontSize: 17,
-                    fontWeight: FontWeight.w700,
-                    color: bgColor,
+                TextButton(
+                  onPressed: () {
+                    Get.to(ShoppingView());
+                  },
+                  child: Text(
+                    '쇼핑하러 가기    |',
+                    style: TextStyle(
+                      fontFamily: 'IBMKR',
+                      fontSize: 17,
+                      fontWeight: FontWeight.w700,
+                      color: bgColor,
+                    ),
                   ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Get.to(CouponView());
+                  },
+                  child: Text(
+                    '내 쿠폰함',
+                    style: TextStyle(
+                      fontFamily: 'IBMKR',
+                      fontSize: 17,
+                      fontWeight: FontWeight.w700,
+                      color: bgColor,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 10,
                 ),
               ],
             ),

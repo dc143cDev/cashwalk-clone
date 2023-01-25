@@ -10,6 +10,7 @@ class HealthView extends GetView<HealthController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: bgColor,
       appBar: AppBar(
         title: Text(
           'Cash Walk',

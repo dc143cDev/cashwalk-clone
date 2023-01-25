@@ -84,19 +84,6 @@ class IndicatorStepBView extends GetView<WalkController> {
                 child: Center(
                   child: Stack(
                     children: [
-                      // SizedBox(
-                      //   width: 150,
-                      //   height: 150,
-                      //   child: CircularStepProgressIndicator(
-                      //     stepSize: 10,
-                      //     selectedStepSize: 10,
-                      //     selectedColor:
-                      //         Color(controller.currentWalkColor.value),
-                      //     unselectedColor: bgColor,
-                      //     totalSteps: controller.walk100maxSecondSplit5,
-                      //     currentStep: controller.walk100s5.value,
-                      //   ),
-                      // ),
                       CircularStepProgressIndicator(
                         stepSize: 15,
                         selectedStepSize: 17,

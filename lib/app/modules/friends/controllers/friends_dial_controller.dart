@@ -95,7 +95,10 @@ class FriendsDialController extends GetxController
             ),
             CustomButtonYellow(
               btnText: '친구 검색하러 가기',
-              onPressed: () {},
+              onPressed: () {
+                Get.back();
+                isSearchBtnClicked();
+              },
             ),
             SizedBox(
               height: 250,
@@ -120,7 +123,83 @@ class FriendsDialController extends GetxController
       CustomDialog(
         titleText: '친구 검색하기',
         dialogContent: Column(
-          children: [],
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 8,
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(30),
+                          borderSide: BorderSide(color: accentYellow)),
+                      focusColor: accentYellow,
+                      fillColor: Colors.grey,
+                      hintText: ' 친구 이름 검색하기            ',
+                      hintStyle: TextStyle(
+                        fontSize: 16,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Expanded(
+                  flex: 2,
+                  child: SizedBox(
+                    height: 55,
+                    width: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: accentYellow,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Icon(Icons.search),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Text(
+              '현재 친구가 되어있는 목록 중에 검색합니다.\n         새로운 친구 추가를 원하시면\n          아래의 버튼을 선택해주세요.',
+              style: TextStyle(fontSize: 13, color: Colors.grey),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            CustomButtonYellow(
+              btnText: '친구 추가하러 가기',
+              onPressed: () {
+                Get.back();
+                isAddBtnClicked();
+              },
+            ),
+            SizedBox(
+              height: 250,
+            ),
+            SizedBox(
+              width: 250,
+              child: CustomButtonBrown(
+                btnText: '확인',
+                onPressed: () {
+                  Get.back();
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -129,7 +208,7 @@ class FriendsDialController extends GetxController
   isControlBtnClicked() {
     Get.dialog(
       CustomDialog(
-        titleText: '친구 관리하기',
+        titleText: '내가 보낸 요청',
         dialogContent: Column(
           children: [],
         ),

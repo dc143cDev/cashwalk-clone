@@ -51,7 +51,7 @@ class IndicatorStepView extends GetView<WalkController> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        '   ${controller.walkTotal}\n 걸음',
+                        '   ${controller.walkTotal}\n   걸음',
                         style: TextStyle(
                           fontFamily: 'IBMKR',
                           fontSize: 18,

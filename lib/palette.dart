@@ -10,3 +10,5 @@ const accentPapaya = Color(0xFFe56717);
 const mainGrey = Color(0xFF393830);
 const baseColor = Color(0xFFdce4ec);
 const textDark = Color(0xFF000302);
+const creamMint = Color(0xFFdce4cc);
+const regularMint = Color(0xFFe4fcef);
