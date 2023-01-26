@@ -1,7 +1,12 @@
 import 'dart:async';
 
+import 'package:cashwalkclone/app/modules/shopping/views/convenience_view.dart';
+import 'package:cashwalkclone/app/modules/shopping/views/dining_view.dart';
+import 'package:cashwalkclone/app/modules/shopping/views/ticket_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
+import '../../coffee/views/coffee_view.dart';
 
 class ShoppingController extends GetxController {
   //현재 페이지 인덱스.
@@ -11,6 +16,22 @@ class ShoppingController extends GetxController {
   PageController pageController = PageController(
     initialPage: 0,
   );
+
+  isCoffeeBtnClicked() {
+    Get.to(CoffeeView());
+  }
+
+  isConvenienceBtnClicked() {
+    Get.to(ConvenienceView());
+  }
+
+  isDiningBtnClicked() {
+    Get.to(DiningView());
+  }
+
+  isTicketBtnClicked() {
+    Get.to(TicketView());
+  }
 
   @override
   void onInit() {

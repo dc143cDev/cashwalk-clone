@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/camera/bindings/camera_binding.dart';
 import '../modules/camera/views/camera_view.dart';
+import '../modules/coffee/bindings/coffee_binding.dart';
+import '../modules/coffee/views/coffee_view.dart';
 import '../modules/community/bindings/community_binding.dart';
 import '../modules/community/views/community_view.dart';
 import '../modules/coupon/bindings/coupon_binding.dart';
@@ -99,6 +101,11 @@ class AppPages {
       name: _Paths.RUNNING,
       page: () => const RunningView(),
       binding: RunningBinding(),
+    ),
+    GetPage(
+      name: _Paths.COFFEE,
+      page: () => const CoffeeView(),
+      binding: CoffeeBinding(),
     ),
   ];
 }

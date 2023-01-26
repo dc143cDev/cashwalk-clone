@@ -17,6 +17,7 @@ class ShoppingView extends GetView<ShoppingController> {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: textDark),
         title: Text(
           'Shopping',
           style: TextStyle(
@@ -79,6 +80,7 @@ class ShoppingView extends GetView<ShoppingController> {
                         width: 30,
                       ),
                       //모듈화.
+                      //베스트 상품 목업.
                       BestProductUI(
                           assetPath: 'assets/images/icecoffee.png',
                           price: '5000'),
@@ -112,35 +114,41 @@ class ShoppingView extends GetView<ShoppingController> {
                   children: [
                     //모듈화.
                     Padding(
-                      padding: const EdgeInsets.all(11.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: ShoppingCategory(
                         onPressed: () {
-                          print('object');
+                          controller.isCoffeeBtnClicked();
                         },
                         iconAssetPath: 'assets/images/icons/coffee-cup.png',
                         btnText: '커피/베이커리',
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(11.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: ShoppingCategory(
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.isConvenienceBtnClicked();
+                        },
                         iconAssetPath: 'assets/images/icons/soft-drink.png',
                         btnText: '편의점',
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(11.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: ShoppingCategory(
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.isDiningBtnClicked();
+                        },
                         iconAssetPath: 'assets/images/icons/spoon-and-fork.png',
                         btnText: '외식',
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(11.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: ShoppingCategory(
-                        onPressed: () {},
+                        onPressed: () {
+                          controller.isTicketBtnClicked();
+                        },
                         iconAssetPath: 'assets/images/icons/tickets.png',
                         btnText: '문화생활',
                       ),

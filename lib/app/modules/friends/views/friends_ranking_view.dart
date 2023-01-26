@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/model/user/me_ui_model.dart';
 import 'package:cashwalkclone/app/modules/friends/controllers/friends_controller.dart';
 import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/material.dart';
@@ -14,57 +15,7 @@ class FriendsRankingView extends GetView<FriendsController> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            width: double.infinity,
-            color: Colors.grey.shade200,
-            child: Padding(
-              padding: EdgeInsets.all(8),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Text('rank'),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: CircleAvatar(
-                      radius: 30,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 13,
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('나(data)'),
-                        SizedBox(
-                          height: 3,
-                        ),
-                        Text('#소속'),
-                        SizedBox(
-                          height: 3,
-                        ),
-                        LinearProgressIndicator(),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    flex: 6,
-                    child: Text('asdf'),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          MeUIModel(),
           Container(
             width: double.infinity,
             color: Colors.grey.shade400,

@@ -17,7 +17,13 @@ class ProfileNCash extends StatelessWidget {
           SizedBox(
             width: 20,
           ),
-          SizedBox(width: 45, height: 45, child: CircleAvatar()),
+          SizedBox(
+            width: 40,
+            height: 40,
+            child: CircleAvatar(
+              backgroundImage: AssetImage('assets/images/profile.png'),
+            ),
+          ),
           SizedBox(
             width: 20,
           ),
