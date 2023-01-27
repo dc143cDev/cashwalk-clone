@@ -1,11 +1,12 @@
-import 'package:cashwalkclone/app/model/user/user_data_model.dart';
-import 'package:cashwalkclone/palette.dart';
+import 'package:cashwalkclone/app/model/product/coffee/stb_data_model.dart';
 import 'package:flutter/material.dart';
 
-class UserUIModel extends StatelessWidget {
-  const UserUIModel({Key? key, this.model}) : super(key: key);
+import '../../../../palette.dart';
 
-  final UserModel? model;
+class StbUIModel extends StatelessWidget {
+  const StbUIModel({Key? key, this.model}) : super(key: key);
+
+  final StbProductModel? model;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,8 @@ class UserUIModel extends StatelessWidget {
             Expanded(
               flex: 2,
               child: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/profile.png'),
+                backgroundImage: NetworkImage(
+                    'http://localhost:8000${model!.productImagePath!}'),
                 radius: 30,
               ),
             ),
@@ -38,7 +40,7 @@ class UserUIModel extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(model!.userName!),
+                  Text(model!.productName!),
                   SizedBox(
                     height: 3,
                   ),
@@ -55,7 +57,7 @@ class UserUIModel extends StatelessWidget {
             ),
             Expanded(
               flex: 6,
-              child: Text(model!.userEmail!),
+              child: Text(model!.productPrice!),
             ),
           ],
         ),
