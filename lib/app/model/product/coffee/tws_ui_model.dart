@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../palette.dart';
 
-class StbUIModel extends StatelessWidget {
-  const StbUIModel({Key? key, this.model}) : super(key: key);
+class TwsUIModel extends StatelessWidget {
+  const TwsUIModel({Key? key, this.model}) : super(key: key);
 
   final CoffeeProductModel? model;
 

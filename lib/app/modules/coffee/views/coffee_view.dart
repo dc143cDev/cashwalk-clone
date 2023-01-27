@@ -1,4 +1,3 @@
-import 'package:cashwalkclone/app/modules/coffee/views/coffee_brand_prb_view.dart';
 import 'package:cashwalkclone/app/modules/coffee/views/coffee_brand_stb_view.dart';
 import 'package:cashwalkclone/app/modules/coffee/views/coffee_brand_tws_view.dart';
 import 'package:cashwalkclone/app/modules/coffee/views/coffee_brand_ydy_view.dart';
@@ -21,7 +20,6 @@ class CoffeeView extends GetView<CoffeeController> {
       CoffeeBrandStbView(),
       CoffeeBrandTwsView(),
       CoffeeBrandYdyView(),
-      CoffeeBrandPrbView(),
     ];
 
     return Scaffold(
@@ -48,10 +46,17 @@ class CoffeeView extends GetView<CoffeeController> {
             flex: 1,
             child: ProfileNCash(),
           ),
+          SizedBox(
+            height: 2,
+            width: double.infinity,
+            child: Container(
+              color: Colors.grey.shade300,
+            ),
+          ),
           Expanded(
             flex: 2,
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(18.0),
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: [
@@ -78,14 +83,6 @@ class CoffeeView extends GetView<CoffeeController> {
                     ),
                     brandName: 'YDY',
                     onTap: () => controller.isBrand2IndexClicked(),
-                  ),
-                  BrandTile(
-                    brandChild: CircleAvatar(
-                      backgroundColor: Colors.blue,
-                      radius: 20,
-                    ),
-                    brandName: '빵집',
-                    onTap: () => controller.isBrand3IndexClicked(),
                   ),
                 ],
               ),
