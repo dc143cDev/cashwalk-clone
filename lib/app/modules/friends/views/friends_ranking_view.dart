@@ -1,14 +1,21 @@
 import 'package:cashwalkclone/app/model/user/me_ui_model.dart';
+import 'package:cashwalkclone/app/modules/coffee/controllers/coffee_controller.dart';
 import 'package:cashwalkclone/app/modules/friends/controllers/friends_controller.dart';
+import 'package:cashwalkclone/app/modules/friends/controllers/friends_data_controller.dart';
 import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-class FriendsRankingView extends GetView<FriendsController> {
+import '../../../model/product/coffee/stb_ui_model.dart';
+import '../../../model/user/user_ui_model.dart';
+
+class FriendsRankingView extends GetView<FriendsDataController> {
   const FriendsRankingView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.put(FriendsDataController());
+
     return Scaffold(
       backgroundColor: bgColor,
       body: Column(
@@ -53,6 +60,21 @@ class FriendsRankingView extends GetView<FriendsController> {
                     ),
                   ),
                 ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: controller.obx(
+              (data) => ListView.builder(
+                itemCount: data?.length,
+                itemBuilder: (context, index) {
+                  //UI 모델에 데이터 세부값을 인덱스로 넘기기
+                  var details = data?[index];
+                  //디테일 값은 받은 User UI 모델이 아이템 빌더로 빌드됨.
+                  return UserUIModel(
+                    model: details,
+                  );
+                },
               ),
             ),
           ),

@@ -18,6 +18,7 @@ abstract class Routes {
   static const QUIZ = _Paths.QUIZ;
   static const RUNNING = _Paths.RUNNING;
   static const COFFEE = _Paths.COFFEE;
+  static const BOTTOM_APP_BAR = _Paths.BOTTOM_APP_BAR;
 }
 
 abstract class _Paths {
@@ -37,4 +38,5 @@ abstract class _Paths {
   static const QUIZ = '/quiz';
   static const RUNNING = '/running';
   static const COFFEE = '/coffee';
+  static const BOTTOM_APP_BAR = '/bottom-app-bar';
 }

@@ -11,6 +11,7 @@ class MyBottomNavBarView extends GetView<MyBottomNavBarController> {
   Widget build(BuildContext context) {
     return Obx(
       () => BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: controller.selectedIndex.value,
         // 요소(item)을 탭 할 시 실행)
         onTap: controller.changeIndex,
@@ -66,17 +67,6 @@ class MyBottomNavBarView extends GetView<MyBottomNavBarController> {
                       color: mainGrey,
                     ),
               label: "Community"),
-          BottomNavigationBarItem(
-              icon: controller.selectedIndex.value == 4
-                  ? Icon(
-                      Icons.newspaper,
-                      color: accentYellow,
-                    )
-                  : Icon(
-                      Icons.newspaper,
-                      color: mainGrey,
-                    ),
-              label: "News"),
         ],
       ),
     );

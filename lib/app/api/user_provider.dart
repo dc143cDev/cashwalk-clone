@@ -6,7 +6,7 @@ import '../model/user/user_data_model.dart';
 
 class UserProvider extends GetConnect implements GetxService {
   Future<List<UserModel>?> getUserData() async {
-    final response = await get('http://localhost:8000/get');
+    final response = await get('http://localhost:8000/getUserRanking');
     print(response.body);
 
     if (response.status.hasError) {

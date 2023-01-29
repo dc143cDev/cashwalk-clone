@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/bottom_app_bar/bindings/bottom_app_bar_binding.dart';
+import '../modules/bottom_app_bar/views/bottom_app_bar_view.dart';
 import '../modules/camera/bindings/camera_binding.dart';
 import '../modules/camera/views/camera_view.dart';
 import '../modules/coffee/bindings/coffee_binding.dart';
@@ -14,12 +16,8 @@ import '../modules/health/bindings/health_binding.dart';
 import '../modules/health/views/health_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/more/bindings/more_binding.dart';
-import '../modules/more/views/more_view.dart';
 import '../modules/my_bottom_nav_bar/bindings/my_bottom_nav_bar_binding.dart';
 import '../modules/my_bottom_nav_bar/views/my_bottom_nav_bar_view.dart';
-import '../modules/news/bindings/news_binding.dart';
-import '../modules/news/views/news_view.dart';
 import '../modules/quiz/bindings/quiz_binding.dart';
 import '../modules/quiz/views/quiz_view.dart';
 import '../modules/running/bindings/running_binding.dart';
@@ -63,16 +61,6 @@ class AppPages {
       binding: CommunityBinding(),
     ),
     GetPage(
-      name: _Paths.NEWS,
-      page: () => const NewsView(),
-      binding: NewsBinding(),
-    ),
-    GetPage(
-      name: _Paths.MORE,
-      page: () => const MoreView(),
-      binding: MoreBinding(),
-    ),
-    GetPage(
       name: _Paths.MY_BOTTOM_NAV_BAR,
       page: () => const MyBottomNavBarView(),
       binding: MyBottomNavBarBinding(),
@@ -106,6 +94,11 @@ class AppPages {
       name: _Paths.COFFEE,
       page: () => const CoffeeView(),
       binding: CoffeeBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOTTOM_APP_BAR,
+      page: () => const BottomAppBarView(),
+      binding: BottomAppBarBinding(),
     ),
   ];
 }

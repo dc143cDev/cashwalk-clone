@@ -10,23 +10,27 @@ class UserUIModel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 80,
       width: double.infinity,
       color: bgColor,
       child: Padding(
         padding: EdgeInsets.all(8),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               width: 20,
             ),
             Expanded(
               flex: 2,
-              child: Text('rank'),
+              child: Text(model!.ranking.toString()),
             ),
             Expanded(
               flex: 2,
               child: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/profile.png'),
+                backgroundImage:
+                    NetworkImage('http://localhost:8000/${model!.profile!}'),
                 radius: 30,
               ),
             ),
@@ -37,16 +41,20 @@ class UserUIModel extends StatelessWidget {
               flex: 3,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(model!.userName!),
                   SizedBox(
                     height: 3,
                   ),
-                  Text('#소속'),
+                  Text(
+                    model!.affiliation!,
+                    style: TextStyle(fontSize: 10),
+                  ),
                   SizedBox(
                     height: 3,
                   ),
-                  LinearProgressIndicator(),
+                  // LinearProgressIndicator(),
                 ],
               ),
             ),

@@ -11,8 +11,6 @@ class CoffeeController extends GetxController
   final RxInt selectedIndex = 0.obs;
 
   //프로바이더 선언. 구조를 공유하는 테이블들은 같은 프로바이더 사용.
-  UserProvider userProvider = UserProvider();
-
   ProductProvider productProvider = ProductProvider();
 
   void changeIndex(int index) {
