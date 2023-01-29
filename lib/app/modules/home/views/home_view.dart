@@ -4,6 +4,7 @@ import 'package:cashwalkclone/app/modules/health/views/health_view.dart';
 import 'package:cashwalkclone/app/modules/my_bottom_nav_bar/controllers/my_bottom_nav_bar_controller.dart';
 import 'package:cashwalkclone/app/modules/my_bottom_nav_bar/views/my_bottom_nav_bar_view.dart';
 import 'package:cashwalkclone/app/modules/walk/views/walk_view.dart';
+import 'package:cashwalkclone/app/widgets/FAB/community_FAB.dart';
 import 'package:cashwalkclone/app/widgets/FAB/friends_FAB.dart';
 import 'package:cashwalkclone/app/widgets/FAB/walk_FAB.dart';
 import 'package:get/get.dart';
@@ -34,12 +35,9 @@ class HomeView extends GetView<HomeController> {
       FriendsFAB(),
       FloatingActionButton(
         onPressed: () {},
-        child: Text('3'),
-      ),
-      FloatingActionButton(
-        onPressed: () {},
         child: Text('4'),
       ),
+      CommunityFAB(),
     ];
 
     //페이지 인덱스 변화를 컨트롤러가 감지에 앱의 body 부분에는 해당하는 페이지를,

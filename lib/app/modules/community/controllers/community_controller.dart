@@ -1,6 +1,9 @@
 import 'dart:convert';
 
+import 'package:cashwalkclone/app/modules/community/views/community_write_view.dart';
+import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
@@ -43,6 +46,43 @@ class CommunityController extends GetxController {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  //커뮤니티 FAB
+  isFABClicked() {
+    Get.bottomSheet(
+      Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: accentYellow,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+            ),
+            height: 55,
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('data'),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+      backgroundColor: bgColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+    );
   }
 
   @override
