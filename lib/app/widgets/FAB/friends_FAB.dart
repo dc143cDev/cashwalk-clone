@@ -5,8 +5,8 @@ import 'package:get/get.dart';
 
 import '../../../palette.dart';
 
-class DialFAB extends StatelessWidget {
-  const DialFAB({Key? key}) : super(key: key);
+class FriendsFAB extends StatelessWidget {
+  const FriendsFAB({Key? key}) : super(key: key);
 
   Widget build(BuildContext context) {
     FriendsDialController friendsDialController = FriendsDialController();

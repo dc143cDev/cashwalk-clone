@@ -13,7 +13,7 @@ class CommunityView extends GetView<CommunityController> {
       backgroundColor: bgColor,
       appBar: AppBar(
         title: Text(
-          'Cash Walk',
+          'Community',
           style: TextStyle(
               fontFamily: 'LS',
               fontSize: 30,

@@ -1,28 +1,35 @@
+import 'package:cashwalkclone/app/model/user/user_data_model.dart';
 import 'package:flutter/material.dart';
 
 class MeUIModel extends StatelessWidget {
-  const MeUIModel({Key? key}) : super(key: key);
+  const MeUIModel({Key? key, this.model}) : super(key: key);
+
+  final UserModel? model;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 80,
       width: double.infinity,
       color: Colors.grey.shade200,
       child: Padding(
         padding: EdgeInsets.all(8),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(
               width: 20,
             ),
             Expanded(
               flex: 2,
-              child: Text('rank'),
+              child: Text(model!.ranking.toString()),
             ),
             Expanded(
               flex: 2,
               child: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/profile.png'),
+                backgroundImage:
+                    NetworkImage('http://localhost:8000/${model!.profile!}'),
                 radius: 30,
               ),
             ),
@@ -33,16 +40,16 @@ class MeUIModel extends StatelessWidget {
               flex: 3,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('나(data)'),
+                  Text('나(${model!.userName})'),
                   SizedBox(
                     height: 3,
                   ),
-                  Text('#소속'),
+                  Text(model!.affiliation!),
                   SizedBox(
                     height: 3,
                   ),
-                  LinearProgressIndicator(),
                 ],
               ),
             ),
@@ -51,7 +58,7 @@ class MeUIModel extends StatelessWidget {
             ),
             Expanded(
               flex: 6,
-              child: Text('asdf'),
+              child: Text(model!.userEmail!),
             ),
           ],
         ),

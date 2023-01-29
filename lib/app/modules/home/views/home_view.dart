@@ -5,18 +5,22 @@ import 'package:cashwalkclone/app/modules/my_bottom_nav_bar/controllers/my_botto
 import 'package:cashwalkclone/app/modules/my_bottom_nav_bar/views/my_bottom_nav_bar_view.dart';
 import 'package:cashwalkclone/app/modules/walk/views/walk_view.dart';
 import 'package:cashwalkclone/app/widgets/FAB/friends_FAB.dart';
+import 'package:cashwalkclone/app/widgets/FAB/walk_FAB.dart';
 import 'package:get/get.dart';
 import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/material.dart';
 
 import '../controllers/home_controller.dart';
 
+//루트 페이지
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Get.put(MyBottomNavBarController());
+
+    //페이지 위젯들 목록.
     final List<Widget> pages = [
       WalkView(),
       FriendsView(),
@@ -24,25 +28,10 @@ class HomeView extends GetView<HomeController> {
       CommunityView(),
     ];
 
+    //FA 버튼 목록.
     final List<Widget> FAB = [
-      FloatingActionButton(
-        heroTag: 'main',
-        backgroundColor: accentYellow,
-        elevation: 10,
-        child: Container(
-          width: 60,
-          height: 60,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: LinearGradient(
-                  colors: [accentYellow, Colors.yellow.shade600])),
-          child: Center(
-            child: Text('data'),
-          ),
-        ),
-        onPressed: () {},
-      ),
-      DialFAB(),
+      WalkFAB(),
+      FriendsFAB(),
       FloatingActionButton(
         onPressed: () {},
         child: Text('3'),
@@ -53,6 +42,8 @@ class HomeView extends GetView<HomeController> {
       ),
     ];
 
+    //페이지 인덱스 변화를 컨트롤러가 감지에 앱의 body 부분에는 해당하는 페이지를,
+    //앱의 FAB 가 들어갈 부분에는 커스텀 FAB 를 표시해줌.
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton:

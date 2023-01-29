@@ -22,7 +22,22 @@ class FriendsRankingView extends GetView<FriendsDataController> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          MeUIModel(),
+          SizedBox(
+            height: 80,
+            child: controller.obx(
+              (data) => ListView.builder(
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  //UI 모델에 데이터 세부값을 인덱스로 넘기기
+                  var details = data?[index];
+                  //디테일 값은 받은 User UI 모델이 아이템 빌더로 빌드됨.
+                  return MeUIModel(
+                    model: details,
+                  );
+                },
+              ),
+            ),
+          ),
           Container(
             width: double.infinity,
             color: Colors.grey.shade400,
