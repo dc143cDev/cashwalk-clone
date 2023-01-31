@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/model/chat/chat_ui_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -9,6 +10,8 @@ class CommunityView extends GetView<CommunityController> {
   const CommunityView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.put(CommunityController());
+
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -24,10 +27,17 @@ class CommunityView extends GetView<CommunityController> {
         elevation: 0,
         backgroundColor: bgColor,
       ),
-      body: Center(
-        child: Text(
-          'CommunityView is working',
-          style: TextStyle(fontSize: 20),
+      body: SafeArea(
+        child: controller.obx(
+          (data) => ListView.builder(
+            itemCount: data?.length,
+            itemBuilder: (context, index) {
+              var details = data?[index];
+              return ChatUIModel(
+                model: details,
+              );
+            },
+          ),
         ),
       ),
     );

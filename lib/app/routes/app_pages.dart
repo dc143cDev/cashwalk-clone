@@ -1,3 +1,5 @@
+import 'package:cashwalkclone/app/model/chat/chat_data_model.dart';
+import 'package:cashwalkclone/app/modules/community/views/chat_page_view.dart';
 import 'package:get/get.dart';
 
 import '../modules/bottom_app_bar/bindings/bottom_app_bar_binding.dart';
@@ -58,6 +60,11 @@ class AppPages {
     GetPage(
       name: _Paths.COMMUNITY,
       page: () => const CommunityView(),
+      binding: CommunityBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHATPAGE,
+      page: () => const ChatPageView(),
       binding: CommunityBinding(),
     ),
     GetPage(
