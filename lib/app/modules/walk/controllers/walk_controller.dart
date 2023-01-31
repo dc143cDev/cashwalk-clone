@@ -30,14 +30,6 @@ class WalkController extends GetxController {
 
   var dialogNeverSeenAgain = false.obs;
 
-  //순서대로 블루 핑크 옐로우.
-  //아래 initPage 에서 null 값을 체크하여 true 일 경우 반한될 기본 색상.
-  //current~ 컬러들이 int 값이기에, 값을 받아주려면 똑같이 int 여야함. 따라서 int color 값.
-  // var initPoint = 0.obs;
-  // var initTotalColor = 0xFf4169e1.obs;
-  // var initWalkColor = 0xFFff69b4.obs;
-  // var initTextColor = 0xffffffff.obs;
-
   //100걸음과 총 걸음수 최대값.
   //목업이기에 사용하는 것이지, 실제로는 유저가 맥스값을 설정할수 있게 해야함.
   final walk100maxSecond = 100;
@@ -105,38 +97,6 @@ class WalkController extends GetxController {
     currentTotalColor.value = storage.read('totalColor');
     currentWalkColor.value = storage.read('walkColor');
     currentTextColor.value = storage.read('textColor');
-
-    var getPoint = storage.read('cash');
-
-    // if (getPoint == 0) {
-    //   pointCount.value = initPoint.value;
-    // } else {
-    //   pointCount.value = getPoint;
-    // }
-    //
-    var getTotalColor = storage.read('totalColor');
-
-    // if (getTotalColor == null) {
-    //   currentTotalColor.value = initTotalColor.value;
-    // } else {
-    //   currentTotalColor.value = getTotalColor;
-    // }
-
-    var getWalkColor = storage.read('walkColor');
-
-    // if (getWalkColor == null) {
-    //   currentWalkColor.value = initWalkColor.value;
-    // } else {
-    // currentWalkColor.value = getWalkColor;
-    // }
-
-    // var getTextColor = storage.read('textColor');
-    //
-    // if (getTextColor == null) {
-    //   currentTextColor.value = initTextColor.value;
-    // } else {
-    // currentTextColor.value = getTextColor;
-    // }
     print('init');
   }
 
