@@ -9,13 +9,22 @@ import 'app/routes/app_pages.dart';
 
 Future main() async {
   await GetStorage.init();
+  await GetStorage().writeIfNull('mainPageImageIndex', '0');
+  await GetStorage().writeIfNull('cash', 1);
+  await GetStorage().writeIfNull('currentCash', 1);
+  await GetStorage().writeIfNull('totalColor', 0xFf4169e1);
+  await GetStorage().writeIfNull('walkColor', 0xFFff69b4);
+  await GetStorage().writeIfNull('textColor', 0xffffffff);
+  await GetStorage().save();
   await GetStorage().read('mainPageImageIndex');
+  await GetStorage().read('cash');
   await GetStorage().read('totalColor');
   await GetStorage().read('walkColor');
   await GetStorage().read('textColor');
-  print(GetStorage().read('totalColor').toString());
-  print(GetStorage().read('test'));
-  print(GetStorage().read('cash'));
+  print('mainPageIndex:${GetStorage().read('mainPageImageIndex')}');
+  print('totalColor:${GetStorage().read('totalColor')}');
+  print('totalColor:${GetStorage().read('totalColor').runtimeType}');
+  print('cash:${GetStorage().read('cash')}');
   runApp(
     GetMaterialApp(
       theme: ThemeData(

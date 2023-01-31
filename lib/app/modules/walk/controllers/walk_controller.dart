@@ -24,19 +24,19 @@ class WalkController extends GetxController {
   //camera controller 쪽에서 넘길 세가지 색상 값을 받아줄 그릇들.
   //아래 타이머 위젯으로 1초마다 감지하여 실시간으로 변함.
   //storage 에 저장될 값은 Color() 가 아닌 int 이기에 우선 0으로 지정.
-  var currentTotalColor = 0.obs;
-  var currentWalkColor = 0.obs;
-  var currentTextColor = 0.obs;
+  var currentTotalColor = 0xFf4169e1.obs;
+  var currentWalkColor = 0xFFff69b4.obs;
+  var currentTextColor = 0xffffffff.obs;
 
   var dialogNeverSeenAgain = false.obs;
 
   //순서대로 블루 핑크 옐로우.
   //아래 initPage 에서 null 값을 체크하여 true 일 경우 반한될 기본 색상.
   //current~ 컬러들이 int 값이기에, 값을 받아주려면 똑같이 int 여야함. 따라서 int color 값.
-  var initPoint = 0.obs;
-  var initTotalColor = 0xFf4169e1.obs;
-  var initWalkColor = 0xFFff69b4.obs;
-  var initTextColor = 0xffffffff.obs;
+  // var initPoint = 0.obs;
+  // var initTotalColor = 0xFf4169e1.obs;
+  // var initWalkColor = 0xFFff69b4.obs;
+  // var initTextColor = 0xffffffff.obs;
 
   //100걸음과 총 걸음수 최대값.
   //목업이기에 사용하는 것이지, 실제로는 유저가 맥스값을 설정할수 있게 해야함.
@@ -55,6 +55,7 @@ class WalkController extends GetxController {
   //아래 타이머로 변화될 값들. 이 값들이 circular indicator 로 전해져서 ui의 애니메이션처럼 표현.
   RxInt walk100 = 0.obs;
   RxInt walkTotal = 0.obs;
+  var cashCount = 0.obs;
   var pointCount = 0.obs;
   // /5
   RxInt walk100s5 = 0.obs;
@@ -63,10 +64,17 @@ class WalkController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    print('point.storage:${storage.read('cash')}');
+    print('point:${pointCount.value}');
+
+    print('cash.storage:${storage.read('currentCash')}');
+    print('cash:${cashCount.value}');
+
+    //포인트 데이터 불러오기.
+    pointCount.value = storage.read('cash');
+    cashCount.value = storage.read('currentCash');
     //위젯 시작시 페이지 이미지 및 색상 데이터 가져옴.
     initPageValue();
-
-    storage.read('test');
     //동시에 두가지 만보기 타이머 시작.
     startWalk();
     startPoint();
@@ -92,38 +100,43 @@ class WalkController extends GetxController {
   //storage 의 값들을 체크하여 값이 null 일 경우 기본 값으로 저장한 값들로 변경.
   initPageValue() {
     imagePath.value = storage.read('mainPageImageIndex');
+    print('imagePath:${imagePath.value}');
+    //null 이면 메인에서 기본 컬러로 처리함.
+    currentTotalColor.value = storage.read('totalColor');
+    currentWalkColor.value = storage.read('walkColor');
+    currentTextColor.value = storage.read('textColor');
 
     var getPoint = storage.read('cash');
 
-    if (getPoint == 0) {
-      pointCount.value = initPoint.value;
-    } else {
-      pointCount.value = getPoint;
-    }
-
+    // if (getPoint == 0) {
+    //   pointCount.value = initPoint.value;
+    // } else {
+    //   pointCount.value = getPoint;
+    // }
+    //
     var getTotalColor = storage.read('totalColor');
 
-    if (getTotalColor == null) {
-      currentTotalColor.value = initTotalColor.value;
-    } else {
-      currentTotalColor.value = getTotalColor;
-    }
+    // if (getTotalColor == null) {
+    //   currentTotalColor.value = initTotalColor.value;
+    // } else {
+    //   currentTotalColor.value = getTotalColor;
+    // }
 
     var getWalkColor = storage.read('walkColor');
 
-    if (getWalkColor == null) {
-      currentWalkColor.value = initWalkColor.value;
-    } else {
-      currentWalkColor.value = getWalkColor;
-    }
+    // if (getWalkColor == null) {
+    //   currentWalkColor.value = initWalkColor.value;
+    // } else {
+    // currentWalkColor.value = getWalkColor;
+    // }
 
-    var getTextColor = storage.read('textColor');
-
-    if (getTextColor == null) {
-      currentTextColor.value = initTextColor.value;
-    } else {
-      currentTextColor.value = getTextColor;
-    }
+    // var getTextColor = storage.read('textColor');
+    //
+    // if (getTextColor == null) {
+    //   currentTextColor.value = initTextColor.value;
+    // } else {
+    // currentTextColor.value = getTextColor;
+    // }
     print('init');
   }
 
@@ -210,8 +223,6 @@ class WalkController extends GetxController {
 
       storage.write('indicatorIndex', indicatorIndex.value);
 
-      storage.write('cash', pointCount.value);
-
       storage.listenKey('mainPageImageIndex', (value) {
         imagePath.value = value;
       });
@@ -257,6 +268,15 @@ class WalkController extends GetxController {
       walk100.value -= 100;
       pointCount.value++;
       storage.write('cash', pointCount.value);
+      storage.save();
     });
+  }
+
+  walkFABClicked() {
+    if (pointCount.value > 0) {
+      pointCount.value -= 1;
+      cashCount.value++;
+      storage.save();
+    } else {}
   }
 }

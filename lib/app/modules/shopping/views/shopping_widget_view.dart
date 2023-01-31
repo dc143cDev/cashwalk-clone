@@ -88,13 +88,15 @@ class ShoppingWidgetView extends GetView<WalkController> {
                 SizedBox(
                   width: 15,
                 ),
-                Text(
-                  '${controller.pointCount.value}',
-                  style: TextStyle(
-                    fontFamily: 'LS',
-                    fontSize: 22,
-                    fontWeight: FontWeight.w300,
-                    color: bgColor,
+                Obx(
+                  () => Text(
+                    '${controller.cashCount.value}',
+                    style: TextStyle(
+                      fontFamily: 'LS',
+                      fontSize: 22,
+                      fontWeight: FontWeight.w300,
+                      color: bgColor,
+                    ),
                   ),
                 ),
                 SizedBox(

@@ -1,6 +1,8 @@
 import 'package:cashwalkclone/app/modules/camera/controllers/camera_controller.dart';
+import 'package:cashwalkclone/app/modules/notification/views/notification_view.dart';
 import 'package:cashwalkclone/app/modules/quiz/views/quiz_widget_view.dart';
 import 'package:cashwalkclone/app/modules/running/views/running_widget_view.dart';
+import 'package:cashwalkclone/app/modules/setting/views/setting_view.dart';
 import 'package:cashwalkclone/app/modules/shopping/views/shopping_widget_view.dart';
 import 'package:cashwalkclone/app/widgets/indicator/indicator_circular_view.dart';
 import 'package:cashwalkclone/app/widgets/indicator/indicator_step_b_view.dart';
@@ -20,7 +22,6 @@ class WalkView extends GetView<WalkController> {
     Get.put(WalkController());
     Get.put(CameraController());
 
-    CameraController cameraController = CameraController();
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -38,7 +39,7 @@ class WalkView extends GetView<WalkController> {
         actions: [
           IconButton(
             onPressed: () {
-              cameraController.read();
+              Get.to(NotificationView());
             },
             icon: Icon(
               Icons.add_alert,
@@ -47,7 +48,7 @@ class WalkView extends GetView<WalkController> {
           ),
           IconButton(
             onPressed: () {
-              CameraController().debugBtn();
+              Get.to(SettingView());
             },
             icon: Icon(
               Icons.settings,

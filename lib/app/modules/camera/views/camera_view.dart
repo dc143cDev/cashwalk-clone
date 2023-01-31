@@ -94,6 +94,8 @@ class CameraView extends GetView<CameraController> {
               height: 40,
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
                   width: 20,

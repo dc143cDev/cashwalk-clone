@@ -1,9 +1,11 @@
+import 'package:cashwalkclone/app/modules/health/views/health_map_view.dart';
 import 'package:get/get.dart';
 
 class HealthController extends GetxController {
-  //TODO: Implement HealthController
+  isFABClicked() {
+    Get.to(HealthMapView());
+  }
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +20,4 @@ class HealthController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

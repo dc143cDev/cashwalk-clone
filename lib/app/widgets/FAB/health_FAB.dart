@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/modules/health/controllers/health_controller.dart';
 import 'package:flutter/material.dart';
 
 import '../../../palette.dart';
@@ -7,6 +8,8 @@ class HealthFAB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HealthController healthController = HealthController();
+
     return FloatingActionButton(
       heroTag: 'health',
       backgroundColor: accentYellow,
@@ -22,7 +25,9 @@ class HealthFAB extends StatelessWidget {
           child: Icon(Icons.map),
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        healthController.isFABClicked();
+      },
     );
   }
 }

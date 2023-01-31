@@ -2,8 +2,9 @@ import 'package:cashwalkclone/app/modules/friends/controllers/friends_dial_contr
 import 'package:cashwalkclone/app/modules/friends/views/friends_accept_view.dart';
 import 'package:cashwalkclone/app/modules/friends/views/friends_invite_view.dart';
 import 'package:cashwalkclone/app/modules/friends/views/friends_ranking_view.dart';
+import 'package:cashwalkclone/app/modules/notification/views/notification_view.dart';
+import 'package:cashwalkclone/app/modules/setting/views/setting_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import 'package:get/get.dart';
 
@@ -20,8 +21,6 @@ class FriendsView extends GetView<FriendsController> {
   Widget build(BuildContext context) {
     Get.put(FriendsController());
     Get.lazyPut(() => FriendsDialController());
-
-    FriendsDialController friendsDialController = FriendsDialController();
 
     return Scaffold(
       backgroundColor: bgColor,
@@ -45,14 +44,18 @@ class FriendsView extends GetView<FriendsController> {
         backgroundColor: bgColor,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(NotificationView());
+            },
             icon: Icon(
               Icons.add_alert,
               color: accentYellow,
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(SettingView());
+            },
             icon: Icon(
               Icons.settings,
               color: accentYellow,

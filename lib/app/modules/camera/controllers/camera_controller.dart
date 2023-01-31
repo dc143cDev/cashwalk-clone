@@ -38,7 +38,7 @@ class CameraController extends GetxController {
   var galleryPageIndexPlus = 0.obs;
 
   //시작 페이지 0번. 노란 이미지.
-  final pageController = PageController(initialPage: 0);
+  final pageController = PageController();
 
   //갤러리 페이지 변화를 감지. 변화된 페이지는 currentPage 라는 내부 변수로 담음.
   //이것을 galleryPageIndex 로 다시 담아주기.
@@ -74,11 +74,6 @@ class CameraController extends GetxController {
     textInt.value++;
     print(textInt.value);
     storage.listenKey('test', (value) => print('new key is $value'));
-  }
-
-  read() {
-    storage.read('test');
-    print(textInt.value);
   }
 
   debugBtn() {
@@ -204,6 +199,9 @@ class CameraController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    storage.read('totalColor');
+    print('cameac.totalColor: ${storage.read('totalColor')}');
+    print('cameac.totalColor: ${storage.read('totalColor').runtimeType}');
   }
 
   @override

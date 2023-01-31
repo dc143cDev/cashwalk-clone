@@ -1,3 +1,5 @@
+import 'package:cashwalkclone/app/modules/notification/views/notification_view.dart';
+import 'package:cashwalkclone/app/modules/setting/views/setting_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -25,14 +27,18 @@ class HealthView extends GetView<HealthController> {
         backgroundColor: bgColor,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(NotificationView());
+            },
             icon: Icon(
               Icons.add_alert,
               color: accentYellow,
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.to(SettingView());
+            },
             icon: Icon(
               Icons.settings,
               color: accentYellow,
