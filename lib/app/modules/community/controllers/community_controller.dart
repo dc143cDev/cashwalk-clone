@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cashwalkclone/app/api/chat_provider.dart';
+import 'package:cashwalkclone/app/model/chat/chat_ui_model.dart';
 import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,8 @@ class CommunityController extends GetxController
 
   ChatProvider chatProvider = ChatProvider();
 
+  var resource = ChatModel(1, '', '').obs;
+
   //소속 표시.
   List<String> chatAffiliation = [
     '달리기모임',
@@ -36,23 +39,20 @@ class CommunityController extends GetxController
       // "chat_writer": writerNameController.value,
     });
     print(postJson);
-    try {
-      var res = await http.post(
-        Uri.parse(url),
-        headers: {"Content-Type": "application/json"},
-        body: postJson,
-      );
-      if (res.statusCode == 200) {
-        var resSignup = jsonDecode(res.body);
-        if (resSignup['success'] == true) {
-          //작성 성공시 텍스트 필드의 값을 지움.
-          print('게시글 작성 완료');
-          titleController.clear();
-          contentController.clear();
-        } else {}
-      }
-    } catch (e) {
-      print(e.toString());
+    chatProvider.getChatData();
+    var res = await http.post(
+      Uri.parse(url),
+      headers: {"Content-Type": "application/json"},
+      body: postJson,
+    );
+    print(res);
+    if (res.statusCode < 200) {
+      var resSignup = jsonDecode(res.body);
+
+      //작성 성공시 텍스트 필드의 값을 지움.
+      print('게시글 작성 완료');
+      titleController.clear();
+      contentController.clear();
     }
   }
 
@@ -105,6 +105,11 @@ class CommunityController extends GetxController
                     onPressed: () {
                       //작성
                       createPost();
+                      chatProvider.getChatData().then(
+                            (value) => ChatUIModel(),
+                          );
+                      titleController.clear();
+                      contentController.clear();
                       Get.back();
                     },
                     child: Text(
@@ -135,7 +140,10 @@ class CommunityController extends GetxController
                   SizedBox(
                     width: 45,
                     height: 45,
-                    child: CircleAvatar(),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          'http://localhost:8000/images/profile/cat1.jpg'),
+                    ),
                   ),
                   SizedBox(
                     width: 20,
@@ -197,6 +205,8 @@ class CommunityController extends GetxController
     super.onInit();
     chatProvider.getChatData().then((response) {
       change(response, status: RxStatus.success());
+      response == resource.value;
+      print('resource: ${resource.value}');
       print(response);
     }, onError: (e) {
       change(null, status: RxStatus.error(e.toString()));

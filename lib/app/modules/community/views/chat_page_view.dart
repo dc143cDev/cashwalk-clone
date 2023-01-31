@@ -73,11 +73,6 @@ class ChatPageView extends GetView {
                 SizedBox(
                   height: 20,
                 ),
-                SafeArea(
-                  child: ListView.builder(
-                    itemBuilder: (context, index) {},
-                  ),
-                ),
               ],
             ),
           ),

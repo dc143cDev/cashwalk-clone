@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:cashwalkclone/app/modules/camera/controllers/camera_controller.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'package:flutter/material.dart';

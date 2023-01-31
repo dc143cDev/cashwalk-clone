@@ -23,6 +23,22 @@ class HealthView extends GetView<HealthController> {
         centerTitle: false,
         elevation: 0,
         backgroundColor: bgColor,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.add_alert,
+              color: accentYellow,
+            ),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.settings,
+              color: accentYellow,
+            ),
+          ),
+        ],
       ),
       body: Center(
         child: Text(

@@ -6,6 +6,7 @@ import 'package:cashwalkclone/app/modules/my_bottom_nav_bar/views/my_bottom_nav_
 import 'package:cashwalkclone/app/modules/walk/views/walk_view.dart';
 import 'package:cashwalkclone/app/widgets/FAB/community_FAB.dart';
 import 'package:cashwalkclone/app/widgets/FAB/friends_FAB.dart';
+import 'package:cashwalkclone/app/widgets/FAB/health_FAB.dart';
 import 'package:cashwalkclone/app/widgets/FAB/walk_FAB.dart';
 import 'package:get/get.dart';
 import 'package:cashwalkclone/palette.dart';
@@ -33,10 +34,7 @@ class HomeView extends GetView<HomeController> {
     final List<Widget> FAB = [
       WalkFAB(),
       FriendsFAB(),
-      FloatingActionButton(
-        onPressed: () {},
-        child: Text('4'),
-      ),
+      HealthFAB(),
       CommunityFAB(),
     ];
 
