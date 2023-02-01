@@ -1,15 +1,9 @@
 import 'dart:io';
-import 'dart:math';
-
 import 'package:cashwalkclone/app/widgets/custom_button_brown.dart';
-import 'package:cashwalkclone/app/widgets/galleryPageUnit.dart';
 import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
-
-import '../../walk/controllers/walk_controller.dart';
-import '../../../widgets/indicator/indicator_circular_view.dart';
 import '../controllers/camera_controller.dart';
 
 class CameraView extends GetView<CameraController> {
@@ -19,6 +13,7 @@ class CameraView extends GetView<CameraController> {
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: textDark),
         elevation: 0,
         backgroundColor: bgColor,
         title: const Text(
@@ -31,18 +26,6 @@ class CameraView extends GetView<CameraController> {
         ),
         centerTitle: true,
         actions: [
-          Center(
-            child: Obx(
-              () => Text(
-                controller.galleryPageIndexPlus.value.toString() + '/5',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontFamily: 'IBMKR',
-                    fontWeight: FontWeight.w700,
-                    fontSize: 18),
-              ),
-            ),
-          ),
           SizedBox(
             width: 40,
           ),
@@ -53,41 +36,32 @@ class CameraView extends GetView<CameraController> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              margin: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  color: bgColor,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                        color: mainGrey,
-                        offset: Offset(0.0, 1.0),
-                        blurRadius: 6.0),
-                  ]),
-              height: 350,
-              width: 500,
-              child: PageView(
-                controller: controller.pageController,
-                //페이지 변경시 onGalleryPageChanged 호출
-                onPageChanged: controller.onGalleryPageChanged,
-                children: [
-                  //galleryPageUnit 커스텀 위젯으로 코드 단축. 모듈화.
-                  PageUnit(
-                    assetImage: AssetImage('assets/images/0.png'),
-                  ),
-                  PageUnit(
-                    assetImage: AssetImage('assets/images/1.png'),
-                  ),
-                  PageUnit(
-                    assetImage: AssetImage('assets/images/2.png'),
-                  ),
-                  PageUnit(
-                    assetImage: AssetImage('assets/images/3.png'),
-                  ),
-                  PageUnit(
-                    assetImage: AssetImage('assets/images/4.png'),
-                  ),
-                ],
+            GestureDetector(
+              onTap: () {
+                controller.getImage(ImageSource.gallery);
+              },
+              child: Obx(
+                () => Container(
+                  margin: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: controller.imagePath.value == ''
+                            ? AssetImage('assets/images/yellow.jpg')
+                                as ImageProvider
+                            : FileImage(File(controller.imagePath.value)),
+                      ),
+                      color: bgColor,
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                            color: mainGrey,
+                            offset: Offset(0.0, 1.0),
+                            blurRadius: 6.0),
+                      ]),
+                  height: 350,
+                  width: 500,
+                ),
               ),
             ),
             SizedBox(
@@ -215,7 +189,7 @@ class CameraView extends GetView<CameraController> {
               },
               child: Container(
                 height: 85,
-                width: 355,
+                width: 335,
                 decoration: BoxDecoration(
                   color: bgColor,
                   boxShadow: [
@@ -266,11 +240,12 @@ class CameraView extends GetView<CameraController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  width: 360,
+                  width: 340,
                   child: CustomButtonBrown(
                     btnText: '적용하기',
                     onPressed: () {
                       controller.applyBtnClicked();
+                      controller.isImageSelected();
                       Get.back();
                     },
                   ),
@@ -278,7 +253,7 @@ class CameraView extends GetView<CameraController> {
               ],
             ),
             SizedBox(
-              height: 40,
+              height: 20,
             ),
           ],
         ),

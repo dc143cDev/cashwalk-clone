@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
 //--사이클--
 //각 UI 에 할당된 세 가지 color picker 로 색상 변경=>
@@ -15,6 +16,11 @@ class CameraController extends GetxController {
   WalkController walkController = WalkController();
   //get storage 사용하기 쉽게 미리 선언.
   GetStorage storage = GetStorage();
+
+  // File? _image;
+  var imagePath = ''.obs;
+  var imageSize = ''.obs;
+  final picker = ImagePicker();
 
   var textInt = 0.obs;
 
@@ -196,6 +202,12 @@ class CameraController extends GetxController {
     );
   }
 
+  isImageSelected() {
+    storage.write('imagePath', imagePath.value);
+    storage.save();
+    print('imagePath: ${imagePath.value}');
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -212,5 +224,14 @@ class CameraController extends GetxController {
   @override
   void onClose() {
     super.onClose();
+  }
+
+  Future getImage(ImageSource imageSource) async {
+    final pickedImage = await ImagePicker().getImage(source: imageSource);
+    if (pickedImage != null) {
+      imagePath.value = pickedImage.path;
+    } else {
+      print('picked image is null');
+    }
   }
 }

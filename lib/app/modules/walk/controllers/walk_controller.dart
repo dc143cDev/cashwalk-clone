@@ -3,6 +3,7 @@ import 'package:get_storage/get_storage.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:health/health.dart';
 
 import '../../../widgets/custom_button_yellow.dart';
 
@@ -18,8 +19,19 @@ class WalkController extends GetxController {
   //get storage 사용하기 쉽게 미리 선언.
   final storage = GetStorage();
 
-  //camera controller 쪽에서 넘길 인덱스를 받아줄 그릇.
-  RxString imagePath = '0'.obs;
+  HealthFactory healthFactory = HealthFactory();
+
+  var now = DateTime.now();
+
+  var healthTypes = [
+    HealthDataType.STEPS,
+    HealthDataType.MOVE_MINUTES,
+    HealthDataType.ACTIVE_ENERGY_BURNED,
+    HealthDataType.HEART_RATE,
+  ];
+
+  //camera controller 쪽에서 넘길 이미지 패스를 받아줄 그릇.
+  var imagePath = ''.obs;
 
   //camera controller 쪽에서 넘길 세가지 색상 값을 받아줄 그릇들.
   //아래 타이머 위젯으로 1초마다 감지하여 실시간으로 변함.
@@ -56,12 +68,18 @@ class WalkController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+    print('imagePath.storage:${storage.read('imagePath')}');
+    print('imagePath:${imagePath.value}');
+
     print('point.storage:${storage.read('cash')}');
     print('point:${pointCount.value}');
 
     print('cash.storage:${storage.read('currentCash')}');
     print('cash:${cashCount.value}');
 
+    //이미지
+    imagePath.value = storage.read('imagePath');
     //포인트 데이터 불러오기.
     pointCount.value = storage.read('cash');
     cashCount.value = storage.read('currentCash');
@@ -91,7 +109,6 @@ class WalkController extends GetxController {
   //camera controller 에서 get storage 에 저장한 인덱스 값.
   //storage 의 값들을 체크하여 값이 null 일 경우 기본 값으로 저장한 값들로 변경.
   initPageValue() {
-    imagePath.value = storage.read('mainPageImageIndex');
     print('imagePath:${imagePath.value}');
     //null 이면 메인에서 기본 컬러로 처리함.
     currentTotalColor.value = storage.read('totalColor');
@@ -183,9 +200,13 @@ class WalkController extends GetxController {
 
       storage.write('indicatorIndex', indicatorIndex.value);
 
-      storage.listenKey('mainPageImageIndex', (value) {
+      storage.listenKey('imagePath', (value) {
         imagePath.value = value;
       });
+
+      // storage.listenKey('mainPageImageIndex', (value) {
+      //   imagePath.value = value;
+      // });
 
       storage.listenKey('totalColor', (value) {
         currentTotalColor.value = value;

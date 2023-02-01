@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:cashwalkclone/app/modules/camera/controllers/camera_controller.dart';
 import 'package:cashwalkclone/app/modules/notification/views/notification_view.dart';
 import 'package:cashwalkclone/app/modules/quiz/views/quiz_widget_view.dart';
@@ -26,7 +27,7 @@ class WalkView extends GetView<WalkController> {
       backgroundColor: bgColor,
       appBar: AppBar(
         title: Text(
-          'Walk',
+          'Cash Walk',
           style: TextStyle(
               fontFamily: 'LS',
               fontSize: 30,
@@ -63,18 +64,24 @@ class WalkView extends GetView<WalkController> {
             SizedBox(
               height: 15,
             ),
-            Container(
-              child: Stack(
-                children: [
-                  Obx(
-                    () => Container(
+            Obx(
+              () => Container(
+                child: Stack(
+                  children: [
+                    Container(
                       margin: EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               fit: BoxFit.fill,
                               //카메라 컨트롤러의 selectedImagePath 스트링 값을 가져와 에셋이미지 패스 연결.
-                              image: AssetImage(
-                                  'assets/images/${controller.imagePath}.png')),
+                              image: controller.imagePath.value ==
+                                      'assets/images/yellow.jpg'
+                                  ? AssetImage('assets/images/yellow.jpg')
+                                      as ImageProvider
+                                  : FileImage(
+                                      File(
+                                          controller.storage.read('imagePath')),
+                                    )),
                           color: bgColor,
                           shape: BoxShape.circle,
                           boxShadow: [
@@ -97,26 +104,26 @@ class WalkView extends GetView<WalkController> {
                         ],
                       ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 15,
-                      ),
-                      FloatingActionButton.small(
-                        heroTag: 'goToCamera',
-                        backgroundColor: accentBrown,
-                        onPressed: () {
-                          controller.CameraBtnClicked();
-                        },
-                        child: Icon(Icons.camera),
-                      ),
-                      SizedBox(
-                        width: 305,
-                      ),
-                    ],
-                  ),
-                ],
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 15,
+                        ),
+                        FloatingActionButton.small(
+                          heroTag: 'goToCamera',
+                          backgroundColor: accentBrown,
+                          onPressed: () {
+                            controller.CameraBtnClicked();
+                          },
+                          child: Icon(Icons.camera),
+                        ),
+                        SizedBox(
+                          width: 305,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(
