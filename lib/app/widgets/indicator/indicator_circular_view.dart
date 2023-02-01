@@ -11,6 +11,7 @@ class IndicatorCircularView extends GetView<WalkController> {
 
   @override
   Widget build(BuildContext context) {
+    var stepsToInt = int.parse(controller.steps.value);
     return Obx(
       () => Stack(
         children: [
@@ -22,7 +23,7 @@ class IndicatorCircularView extends GetView<WalkController> {
                 strokeWidth: 10,
                 backgroundColor: bgColor,
                 color: Color(controller.currentWalkColor.value),
-                value: controller.walk100.value.toDouble() /
+                value: controller.stepsPointVisible.value.toDouble() /
                     controller.walk100maxSecond,
               ),
             ),
@@ -35,8 +36,7 @@ class IndicatorCircularView extends GetView<WalkController> {
                 strokeWidth: 12,
                 backgroundColor: bgColor,
                 color: Color(controller.currentTotalColor.value),
-                value: controller.walkTotal.value.toDouble() /
-                    controller.walkTotalMax.toInt(),
+                value: stepsToInt / controller.walkTotalMax.toInt(),
               ),
             ),
           ),
@@ -50,38 +50,29 @@ class IndicatorCircularView extends GetView<WalkController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      SizedBox(
+                        height: 40,
+                      ),
                       Text(
-                        '   ${controller.walkTotal}\n   걸음',
+                        '${controller.steps.value}',
                         style: TextStyle(
                           fontFamily: 'IBMKR',
-                          fontSize: 18,
+                          fontSize: 28,
+                          fontWeight: FontWeight.w700,
+                          color: Color(controller.currentTextColor.value),
+                        ),
+                      ),
+                      Text(
+                        '${controller.stepsPointVisible}',
+                        style: TextStyle(
+                          fontFamily: 'IBMKR',
+                          fontSize: 28,
                           fontWeight: FontWeight.w700,
                           color: Color(controller.currentTextColor.value),
                         ),
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        '         ${controller.walk100}/100\n 다음 포인트까지',
-                        style: TextStyle(
-                          fontFamily: 'IBMKR',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: Color(controller.currentTextColor.value),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        '${controller.pointCount} Cash',
-                        style: TextStyle(
-                          fontFamily: 'IBMKR',
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: Color(controller.currentTextColor.value),
-                        ),
+                        height: 40,
                       ),
                     ],
                   ),

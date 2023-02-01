@@ -9,6 +9,8 @@ class IndicatorStepView extends GetView<WalkController> {
   const IndicatorStepView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var stepsToInt = int.parse(controller.steps.value);
+
     return Obx(
       () => Stack(
         children: [

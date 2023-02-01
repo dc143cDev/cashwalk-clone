@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:health/health.dart';
+import 'package:pedometer/pedometer.dart';
 
 import '../../../widgets/custom_button_yellow.dart';
 
@@ -19,7 +20,7 @@ class WalkController extends GetxController {
   //get storage 사용하기 쉽게 미리 선언.
   final storage = GetStorage();
 
-  HealthFactory healthFactory = HealthFactory();
+  HealthFactory health = HealthFactory();
 
   var now = DateTime.now();
 
@@ -44,6 +45,7 @@ class WalkController extends GetxController {
 
   //100걸음과 총 걸음수 최대값.
   //목업이기에 사용하는 것이지, 실제로는 유저가 맥스값을 설정할수 있게 해야함.
+  //이제 최대값은 설정할수 있게 함. 20230201
   final walk100maxSecond = 100;
   final walkTotalMax = 1000;
 
@@ -83,6 +85,9 @@ class WalkController extends GetxController {
     //포인트 데이터 불러오기.
     pointCount.value = storage.read('cash');
     cashCount.value = storage.read('currentCash');
+    //health
+    // startHealth();
+    pedometerInit();
     //위젯 시작시 페이지 이미지 및 색상 데이터 가져옴.
     initPageValue();
     //동시에 두가지 만보기 타이머 시작.
@@ -188,6 +193,115 @@ class WalkController extends GetxController {
     Get.toNamed('/camera');
   }
 
+  //pedometer part.
+
+  //상태 체크용. 지금은 딱히 사용 안함.
+  var pedometerStatus = ''.obs;
+
+  //스트림 선언.
+  late Stream<StepCount> stepCountStream;
+
+  //steps 은 실제 ui 에 표시될 진짜 걸음 수.
+  //stepsForPoint 는 stepsPointVisible 이 값을 감지할수 있도록 거쳐가는 용도.
+  //stepsPointVisible 은 유저가 다음 포인트까지 얼마나 남았는지 알수있도록
+  //ui 에 표시될 데이터를 담아줄 용도.
+  var steps = ''.obs;
+  var stepsForPoint = 0.obs;
+  var stepsPointVisible = 0.obs;
+
+  pedometerInit() {
+    stepCountStream = Pedometer.stepCountStream;
+    stepCountStream.listen(onStepCount).onError(onStepCountError);
+  }
+
+  onStatus(PedestrianStatus event) {
+    pedometerStatus.value = event.status;
+    DateTime timeStamp = event.timeStamp;
+  }
+
+  void onStepCountError(error) {
+    print('onStepCountError: $error');
+    steps.value = 'Step Count not available';
+  }
+
+  onStepCount(StepCount event) {
+    //steps 는 ui 에 표시되어야하기에 스트링 값으로 받아줌.
+    //stepsForPoint.value == steps.
+    steps.value = event.steps.toString();
+    stepsForPoint.value = event.steps;
+    stepsPointVisible.value++;
+    print('steps value: ${steps.value}');
+    DateTime timeStamp = event.timeStamp;
+
+    //stepsForPoint 는 int 값이라 연산자에 대입 가능.
+    //100 단위가 될때마다 stepsPointVisible 을 0 으로 돌리는 역할을 함.
+    //로직은 100으로 나눈 수가 0일때마다 stepsPointVisible 의 값을 0으로 바꾸고 포인트 ++.
+    if (stepsForPoint.value % 100 == 0) {
+      stepsPointVisible.value = 0;
+      pointCount.value++;
+      print('pointCount++');
+    }
+  }
+
+  //health part.
+  //구글 인증 이슈로 일단 보류.
+
+  var HealthWalkPoint = 0.obs;
+
+  startHealth() async {
+    DateTime startDate = DateTime.now();
+    DateTime endDate = DateTime.now();
+
+    Future.delayed(Duration(seconds: 1), () async {
+      var isAuth = await health.requestAuthorization(healthTypes);
+      if (isAuth) {
+        var stepsAvailable =
+            HealthFactory().isDataTypeAvailable(HealthDataType.STEPS).obs;
+        print('is Steps data type : ${stepsAvailable.value}');
+        if (stepsAvailable.value) {
+          //데이터 담을 그릇.
+          var healthDataList = [].obs;
+          try {
+            List<HealthDataPoint> healthData = await health
+                .getHealthDataFromTypes(startDate, endDate, healthTypes);
+            healthDataList.addAll(healthData);
+          } catch (e) {
+            print(e.toString());
+          }
+
+          var tempList = [].obs;
+          healthDataList.forEach((stepsDataPoint) {
+            tempList.add('Duration: []');
+          });
+        }
+      }
+    });
+
+    List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(
+        startDate.subtract(Duration(days: 1)), endDate, healthTypes);
+
+    healthTypes = [
+      HealthDataType.STEPS,
+      HealthDataType.MOVE_MINUTES,
+      HealthDataType.ACTIVE_ENERGY_BURNED,
+      HealthDataType.HEART_RATE,
+    ];
+    var permissions = [
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+      HealthDataAccess.READ_WRITE,
+    ];
+
+    await health.requestAuthorization(healthTypes, permissions: permissions);
+
+    var success =
+        await health.writeHealthData(10, HealthDataType.STEPS, now, now);
+
+    var midnight = DateTime(now.year, now.month, now.day);
+    var steps = await health.getTotalStepsInInterval(midnight, now);
+  }
+
   //타이머.
   late Timer _timer;
 
@@ -197,6 +311,9 @@ class WalkController extends GetxController {
     _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
       walkTotal.value++;
       walk100.value++;
+
+      print('steps value : ${steps.value}');
+      print('steps for point value: ${stepsPointVisible.value} / 100');
 
       storage.write('indicatorIndex', indicatorIndex.value);
 
@@ -247,7 +364,6 @@ class WalkController extends GetxController {
   void startPoint() {
     _timer = Timer.periodic(Duration(seconds: 100), (Timer timer) {
       walk100.value -= 100;
-      pointCount.value++;
       storage.write('cash', pointCount.value);
       storage.save();
     });

@@ -10,7 +10,9 @@ import 'app/routes/app_pages.dart';
 
 Future main() async {
   await WidgetsFlutterBinding.ensureInitialized();
+  //헬스 권한 받기.
   await Permission.activityRecognition.request();
+  //저장소 데이터로 작동하는 위젯들의 초기값 넣어주기.
   await GetStorage.init();
   await GetStorage().writeIfNull('imagePath', 'assets/images/yellow.jpg');
   await GetStorage().writeIfNull('cash', 1);
