@@ -10,6 +10,16 @@ class IndicatorStepBView extends GetView<WalkController> {
   const IndicatorStepBView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    var stepsToInt = int.parse(controller.steps.value);
+    var stepsSplit = stepsToInt / 34;
+    var stepsMaxToInt = controller.walkTotalMax;
+    var stepsMaxSplit = stepsMaxToInt / 34;
+
+    var pointToInt = controller.stepsPointVisible.value;
+    var pointSplit = pointToInt / 5;
+    var pointMaxToInt = controller.walk100maxSecond;
+    var pointMaxSplit = pointMaxToInt / 5;
+
     return Obx(
       () => Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,16 +47,16 @@ class IndicatorStepBView extends GetView<WalkController> {
                           selectedColor:
                               Color(controller.currentTotalColor.value),
                           unselectedColor: bgColor,
-                          totalSteps: controller.walkTotalMaxSplit5,
-                          currentStep: controller.walkTotals5.value,
+                          totalSteps: stepsMaxSplit.toInt(),
+                          currentStep: stepsSplit.toInt(),
                         ),
                       ),
                       Center(
                         child: Text(
-                          ' ${controller.walkTotal}\n  걸음',
+                          '${controller.steps}',
                           style: TextStyle(
                             fontFamily: 'IBMKR',
-                            fontSize: 18,
+                            fontSize: 28,
                             fontWeight: FontWeight.w700,
                             color: Color(controller.currentTextColor.value),
                           ),
@@ -66,17 +76,8 @@ class IndicatorStepBView extends GetView<WalkController> {
               SizedBox(
                 width: 110,
               ),
-              Text(
-                '${controller.pointCount} Cash',
-                style: TextStyle(
-                  fontFamily: 'IBMKR',
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: Color(controller.currentTextColor.value),
-                ),
-              ),
               SizedBox(
-                width: 20,
+                width: 70,
               ),
               SizedBox(
                 width: 120,
@@ -89,15 +90,15 @@ class IndicatorStepBView extends GetView<WalkController> {
                         selectedStepSize: 17,
                         selectedColor: Color(controller.currentWalkColor.value),
                         unselectedColor: bgColor,
-                        totalSteps: controller.walk100maxSecondSplit5,
-                        currentStep: controller.walk100s5.value,
+                        totalSteps: pointMaxSplit.toInt(),
+                        currentStep: pointSplit.toInt(),
                       ),
                       Center(
                         child: Text(
-                          '        ${controller.walk100}/100\n 다음 포인트까지',
+                          '${controller.stepsPointVisible}',
                           style: TextStyle(
                             fontFamily: 'IBMKR',
-                            fontSize: 12,
+                            fontSize: 28,
                             fontWeight: FontWeight.w700,
                             color: Color(controller.currentTextColor.value),
                           ),
@@ -108,9 +109,6 @@ class IndicatorStepBView extends GetView<WalkController> {
                 ),
               ),
             ],
-          ),
-          SizedBox(
-            height: 30,
           ),
         ],
       ),

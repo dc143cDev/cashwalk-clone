@@ -1,9 +1,27 @@
+import 'package:cashwalkclone/app/api/url_controller.dart';
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
+  var formKey = GlobalKey<FormState>();
 
-  final count = 0.obs;
+  var emailController = TextEditingController();
+  var passwordController = TextEditingController();
+
+  UrlController urlController = UrlController();
+
+  //로그인 버튼 클릭
+  //발리데이터 데이터를 확인하고, 올바른 데이터일시 로그인 쿼리 날림.
+  isLoginBtnClicked() {
+    if (formKey.currentState!.validate()) {
+      getEmailData() async {
+        var url = "${urlController.baseUrl}";
+      }
+
+      Get.toNamed('/home');
+    }
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +36,4 @@ class LoginController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

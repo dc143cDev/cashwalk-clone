@@ -11,7 +11,8 @@ class IndicatorCircularView extends GetView<WalkController> {
 
   @override
   Widget build(BuildContext context) {
-    var stepsToInt = int.parse(controller.steps.value);
+    Get.put(WalkController());
+    var stepsToInt = int.parse(controller.steps.value) + 0;
     return Obx(
       () => Stack(
         children: [

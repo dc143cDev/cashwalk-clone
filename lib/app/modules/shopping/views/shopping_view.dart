@@ -158,6 +158,9 @@ class ShoppingView extends GetView<ShoppingController> {
               ),
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );

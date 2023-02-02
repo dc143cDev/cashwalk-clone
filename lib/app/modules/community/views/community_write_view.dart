@@ -11,6 +11,7 @@ class CommunityWriteView extends GetView<CommunityController> {
   Widget build(BuildContext context) {
     Get.put(CommunityController());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: bgColor,
       appBar: AppBar(
         iconTheme: IconThemeData(color: textDark),

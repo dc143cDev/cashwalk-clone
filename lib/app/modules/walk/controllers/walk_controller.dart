@@ -19,18 +19,6 @@ class WalkController extends GetxController {
   static WalkController get to => Get.find();
   //get storage 사용하기 쉽게 미리 선언.
   final storage = GetStorage();
-
-  HealthFactory health = HealthFactory();
-
-  var now = DateTime.now();
-
-  var healthTypes = [
-    HealthDataType.STEPS,
-    HealthDataType.MOVE_MINUTES,
-    HealthDataType.ACTIVE_ENERGY_BURNED,
-    HealthDataType.HEART_RATE,
-  ];
-
   //camera controller 쪽에서 넘길 이미지 패스를 받아줄 그릇.
   var imagePath = ''.obs;
 
@@ -52,9 +40,6 @@ class WalkController extends GetxController {
   //인디케이터 index
   var indicatorIndex = 0.obs;
   var currentIndicator = 0.obs;
-
-  final walk100maxSecondSplit5 = 20;
-  final walkTotalMaxSplit5 = 30;
 
   final indicatorController = PageController(initialPage: 0, keepPage: true);
 
@@ -90,13 +75,8 @@ class WalkController extends GetxController {
     pedometerInit();
     //위젯 시작시 페이지 이미지 및 색상 데이터 가져옴.
     initPageValue();
-    //동시에 두가지 만보기 타이머 시작.
+    //동시에 리스너 타이머 시작.
     startWalk();
-    startPoint();
-    // /5
-    startSplit5();
-    startSplitTotal5();
-    startSplit5Cut();
   }
 
   @override
@@ -205,7 +185,7 @@ class WalkController extends GetxController {
   //stepsForPoint 는 stepsPointVisible 이 값을 감지할수 있도록 거쳐가는 용도.
   //stepsPointVisible 은 유저가 다음 포인트까지 얼마나 남았는지 알수있도록
   //ui 에 표시될 데이터를 담아줄 용도.
-  var steps = ''.obs;
+  var steps = '0'.obs;
   var stepsForPoint = 0.obs;
   var stepsPointVisible = 0.obs;
 
@@ -248,70 +228,13 @@ class WalkController extends GetxController {
 
   var HealthWalkPoint = 0.obs;
 
-  startHealth() async {
-    DateTime startDate = DateTime.now();
-    DateTime endDate = DateTime.now();
-
-    Future.delayed(Duration(seconds: 1), () async {
-      var isAuth = await health.requestAuthorization(healthTypes);
-      if (isAuth) {
-        var stepsAvailable =
-            HealthFactory().isDataTypeAvailable(HealthDataType.STEPS).obs;
-        print('is Steps data type : ${stepsAvailable.value}');
-        if (stepsAvailable.value) {
-          //데이터 담을 그릇.
-          var healthDataList = [].obs;
-          try {
-            List<HealthDataPoint> healthData = await health
-                .getHealthDataFromTypes(startDate, endDate, healthTypes);
-            healthDataList.addAll(healthData);
-          } catch (e) {
-            print(e.toString());
-          }
-
-          var tempList = [].obs;
-          healthDataList.forEach((stepsDataPoint) {
-            tempList.add('Duration: []');
-          });
-        }
-      }
-    });
-
-    List<HealthDataPoint> healthData = await health.getHealthDataFromTypes(
-        startDate.subtract(Duration(days: 1)), endDate, healthTypes);
-
-    healthTypes = [
-      HealthDataType.STEPS,
-      HealthDataType.MOVE_MINUTES,
-      HealthDataType.ACTIVE_ENERGY_BURNED,
-      HealthDataType.HEART_RATE,
-    ];
-    var permissions = [
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-      HealthDataAccess.READ_WRITE,
-    ];
-
-    await health.requestAuthorization(healthTypes, permissions: permissions);
-
-    var success =
-        await health.writeHealthData(10, HealthDataType.STEPS, now, now);
-
-    var midnight = DateTime(now.year, now.month, now.day);
-    var steps = await health.getTotalStepsInInterval(midnight, now);
-  }
-
   //타이머.
   late Timer _timer;
 
   //컨트롤러 init 시 작동되는 함수들.
-  //Duration 주기(1초)마다 총 걸음수와 100걸음 걸음수를 1씩 증가시키고, storage 값을 한번씩 읽음.
+  //Duration 주기(1초) 마다 storage 값을 한번씩 읽음.
   void startWalk() {
     _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
-      walkTotal.value++;
-      walk100.value++;
-
       print('steps value : ${steps.value}');
       print('steps for point value: ${stepsPointVisible.value} / 100');
 
@@ -320,10 +243,6 @@ class WalkController extends GetxController {
       storage.listenKey('imagePath', (value) {
         imagePath.value = value;
       });
-
-      // storage.listenKey('mainPageImageIndex', (value) {
-      //   imagePath.value = value;
-      // });
 
       storage.listenKey('totalColor', (value) {
         currentTotalColor.value = value;
@@ -339,40 +258,12 @@ class WalkController extends GetxController {
     });
   }
 
-  void startSplit5() {
-    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
-      walk100s5.value++;
-    });
-  }
-
-  //1000/1 / 30
-  void startSplitTotal5() {
-    _timer = Timer.periodic(Duration(seconds: 33), (Timer timer) {
-      walkTotals5.value++;
-    });
-  }
-
-  // /5
-  void startSplit5Cut() {
-    _timer = Timer.periodic(Duration(seconds: 100), (Timer timer) {
-      walk100s5.value -= 20;
-    });
-  }
-
-  //init 시 호출되는 또 다른 메소드.
-  // 사실 100만큼 올라갈때마다 그걸 감지해야 하는데, 목업이기에 임의로 100초 간격으로 업데이트.
-  void startPoint() {
-    _timer = Timer.periodic(Duration(seconds: 100), (Timer timer) {
-      walk100.value -= 100;
-      storage.write('cash', pointCount.value);
-      storage.save();
-    });
-  }
-
   walkFABClicked() {
     if (pointCount.value > 0) {
       pointCount.value -= 1;
       cashCount.value++;
+      storage.write('cash', pointCount.value);
+      storage.write('currentCash', cashCount.value);
       storage.save();
     } else {}
   }

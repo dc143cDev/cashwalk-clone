@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:cashwalkclone/app/api/chat_provider.dart';
 import 'package:cashwalkclone/app/model/chat/chat_ui_model.dart';
 import 'package:cashwalkclone/palette.dart';
@@ -60,6 +59,7 @@ class CommunityController extends GetxController
   isFABClicked() {
     Get.bottomSheet(
       Column(
+        mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -197,6 +197,7 @@ class CommunityController extends GetxController
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
+      isScrollControlled: true,
     );
   }
 

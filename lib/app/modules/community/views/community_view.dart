@@ -15,6 +15,7 @@ class CommunityView extends GetView<CommunityController> {
     Get.put(CommunityController());
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: bgColor,
       appBar: AppBar(
         title: Text(

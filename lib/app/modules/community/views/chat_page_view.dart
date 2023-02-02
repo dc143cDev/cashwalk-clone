@@ -13,6 +13,7 @@ class ChatPageView extends GetView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: bgColor,
       appBar: AppBar(
         iconTheme: IconThemeData(color: textDark),
