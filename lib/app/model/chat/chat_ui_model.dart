@@ -80,9 +80,6 @@ class ChatUIModel extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 20,
-          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(24, 0, 13, 0),
             child: Row(

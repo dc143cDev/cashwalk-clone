@@ -6,12 +6,12 @@ import '../modules/bottom_app_bar/views/bottom_app_bar_view.dart';
 import '../modules/camera/bindings/camera_binding.dart';
 import '../modules/camera/views/camera_view.dart';
 import '../modules/coffee/bindings/coffee_binding.dart';
+import '../modules/coffee/views/coffe_page_view.dart';
 import '../modules/coffee/views/coffee_view.dart';
 import '../modules/community/bindings/community_binding.dart';
 import '../modules/community/views/chat_page_view.dart';
 import '../modules/community/views/community_view.dart';
-import '../modules/coupon/bindings/coupon_binding.dart';
-import '../modules/coupon/views/coupon_view.dart';
+import '../modules/coffee/views/coupon_view.dart';
 import '../modules/friends/bindings/friends_binding.dart';
 import '../modules/friends/views/friends_view.dart';
 import '../modules/health/bindings/health_binding.dart';
@@ -74,6 +74,11 @@ class AppPages {
       binding: CommunityBinding(),
     ),
     GetPage(
+      name: _Paths.COFFEEPAGE,
+      page: () => const CoffeePageView(),
+      binding: CoffeeBinding(),
+    ),
+    GetPage(
       name: _Paths.MY_BOTTOM_NAV_BAR,
       page: () => const MyBottomNavBarView(),
       binding: MyBottomNavBarBinding(),
@@ -82,11 +87,6 @@ class AppPages {
       name: _Paths.CAMERA,
       page: () => CameraView(),
       binding: CameraBinding(),
-    ),
-    GetPage(
-      name: _Paths.COUPON,
-      page: () => const CouponView(),
-      binding: CouponBinding(),
     ),
     GetPage(
       name: _Paths.SHOPPING,

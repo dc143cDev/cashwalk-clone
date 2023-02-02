@@ -1,17 +1,33 @@
 import 'package:cashwalkclone/app/api/product_provider.dart';
-import 'package:cashwalkclone/app/api/user_provider.dart';
+import 'package:cashwalkclone/app/api/url_controller.dart';
 import 'package:cashwalkclone/app/model/product/coffee/coffee_data_model.dart';
-import 'package:cashwalkclone/app/model/user/user_data_model.dart';
+
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../../../model/product/coffee/coffee_card_model.dart';
 
 //stateMixin 을 같이 상속하여 api 호출 상태에 따라 state 관리
 class CoffeeController extends GetxController
     with StateMixin<List<CoffeeProductModel>> {
+  GetStorage storage = GetStorage();
+
+  UrlController urlController = UrlController();
+
   //페이지 인덱스
   final RxInt selectedIndex = 0.obs;
 
   //프로바이더 선언. 구조를 공유하는 테이블들은 같은 프로바이더 사용.
   ProductProvider productProvider = ProductProvider();
+
+  Rx<List<CoffeeCardModel>> coffeeCard = Rx<List<CoffeeCardModel>>([]);
+  late CoffeeCardModel coffeeCardModel;
+
+  var titleForCard = ''.obs;
+  var brandForCard = ''.obs;
+  var priceForCard = ''.obs;
+
+  var itemCount = 0.obs;
 
   void changeIndex(int index) {
     selectedIndex(index);
@@ -63,6 +79,28 @@ class CoffeeController extends GetxController
     });
   }
 
+  //들어갈 밸류를 ui 단에서 넣어줄건지 여기서 한번 거쳐갈지는 보류.
+  addCoffeeCard(String title, String brand, String price) {
+    coffeeCardModel = CoffeeCardModel(
+      title: title,
+      brand: brand,
+      price: price,
+    );
+    coffeeCard.value.add(coffeeCardModel);
+    itemCount.value = coffeeCard.value.length;
+  }
+
+  isTakeBtnClicked() {
+    titleForCard.value = Get.arguments['title'];
+    brandForCard.value = Get.arguments['brand'];
+    priceForCard.value = Get.arguments['price'];
+    print('title card:${titleForCard.value}');
+    print('brand card:${brandForCard.value}');
+    print('price card:${priceForCard.value}');
+    print('${coffeeCard}');
+    storage.write('coffeeCard', coffeeCard);
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -72,6 +110,7 @@ class CoffeeController extends GetxController
     }, onError: (e) {
       change(null, status: RxStatus.error(e.toString()));
     });
+    storage.read('coffeeCard');
   }
 
   @override
@@ -82,5 +121,7 @@ class CoffeeController extends GetxController
   @override
   void onClose() {
     super.onClose();
+    storage.save();
+    // storage.write('coffeeCard', coffeeCard);
   }
 }

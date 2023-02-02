@@ -9,6 +9,7 @@ abstract class Routes {
   static const HEALTH = _Paths.HEALTH;
   static const COMMUNITY = _Paths.COMMUNITY;
   static const CHATPAGE = _Paths.CHATPAGE;
+  static const COFFEEPAGE = _Paths.COFFEEPAGE;
   static const NEWS = _Paths.NEWS;
   static const MENU = _Paths.MENU;
   static const MORE = _Paths.MORE;
@@ -33,6 +34,7 @@ abstract class _Paths {
   static const HEALTH = '/health';
   static const COMMUNITY = '/community';
   static const CHATPAGE = '/chat-page';
+  static const COFFEEPAGE = '/coffee-page';
   static const NEWS = '/news';
   static const MENU = '/menu';
   static const MORE = '/more';

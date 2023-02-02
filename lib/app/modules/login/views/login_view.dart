@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/modules/coffee/controllers/coffee_controller.dart';
 import 'package:cashwalkclone/app/modules/home/views/home_view.dart';
 import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    CoffeeController coffeeController = CoffeeController();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: accentYellow,
@@ -134,6 +137,11 @@ class LoginView extends GetView<LoginController> {
                     shape: StadiumBorder(),
                   ),
                   onPressed: () {
+                    coffeeController.addCoffeeCard(
+                      '1',
+                      controller.emailController.text,
+                      controller.passwordController.text,
+                    );
                     controller.isLoginBtnClicked();
                   },
                   child: Text(

@@ -16,7 +16,7 @@ class BestProductUI extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         CircleAvatar(
-          radius: 40,
+          radius: 30,
           backgroundColor: regularMint,
           child: Center(
             child:
@@ -24,7 +24,7 @@ class BestProductUI extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 10,
+          height: 8,
         ),
         Text('${price}캐시'),
         SizedBox(

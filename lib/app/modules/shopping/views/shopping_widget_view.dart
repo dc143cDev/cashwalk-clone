@@ -1,4 +1,4 @@
-import 'package:cashwalkclone/app/modules/coupon/views/coupon_view.dart';
+import 'package:cashwalkclone/app/modules/coffee/views/coupon_view.dart';
 import 'package:cashwalkclone/app/modules/shopping/views/shopping_view.dart';
 import 'package:cashwalkclone/app/modules/walk/controllers/walk_controller.dart';
 import 'package:cashwalkclone/app/modules/walk/views/walk_view.dart';
@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../palette.dart';
+import '../../../widgets/bestProduct.dart';
 
 class ShoppingWidgetView extends GetView<WalkController> {
   const ShoppingWidgetView({Key? key}) : super(key: key);
@@ -42,10 +43,25 @@ class ShoppingWidgetView extends GetView<WalkController> {
                     style: TextStyle(color: Colors.grey.shade400),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('data'),
+                      //모듈화.
+                      //베스트 상품 목업.
+                      BestProductUI(
+                          assetPath: 'assets/images/icecoffee.png',
+                          price: '5000'),
+                      SizedBox(
+                        width: 40,
+                      ),
+                      BestProductUI(
+                          assetPath: 'assets/images/latte.png', price: '5500'),
+                      SizedBox(
+                        width: 40,
+                      ),
+                      BestProductUI(
+                          assetPath: 'assets/images/chocolatte.PNG',
+                          price: '6000'),
                     ],
                   ),
                 ],

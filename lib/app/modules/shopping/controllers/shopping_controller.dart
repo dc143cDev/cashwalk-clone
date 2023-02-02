@@ -22,15 +22,15 @@ class ShoppingController extends GetxController {
   }
 
   isConvenienceBtnClicked() {
-    Get.to(ConvenienceView());
+    Get.to(CoffeeView());
   }
 
   isDiningBtnClicked() {
-    Get.to(DiningView());
+    Get.to(CoffeeView());
   }
 
   isTicketBtnClicked() {
-    Get.to(TicketView());
+    Get.to(CoffeeView());
   }
 
   @override

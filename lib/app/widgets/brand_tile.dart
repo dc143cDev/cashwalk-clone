@@ -47,9 +47,6 @@ class BrandTile extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 2,
-            ),
             Text(brandName),
           ],
         ),

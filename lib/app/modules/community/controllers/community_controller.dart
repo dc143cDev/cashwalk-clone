@@ -34,7 +34,7 @@ class CommunityController extends GetxController
 
   createPost() async {
     //기존의 http 방식을 통해 데이터를 api 서버로 post.
-    var url = "http://localhost:8000/createPost";
+    var url = "${urlController.baseUrl}createPost";
     final postJson = jsonEncode({
       "chat_title": titleController.text,
       "chat_contents": contentController.text,
@@ -52,7 +52,7 @@ class CommunityController extends GetxController
       var resSignup = jsonDecode(res.body);
 
       //작성 성공시 텍스트 필드의 값을 지움.
-      print('게시글 작성 완료');
+      print('작성 완료');
       titleController.clear();
       contentController.clear();
     }

@@ -53,7 +53,7 @@ class ShoppingView extends GetView<ShoppingController> {
                   itemBuilder: (context, index) {
                     return Obx(
                       () => Image.asset(
-                        'assets/images/${controller.currentPage}.png',
+                        'assets/images/banner/${controller.currentPage}.jpg',
                         fit: BoxFit.cover,
                       ),
                     );

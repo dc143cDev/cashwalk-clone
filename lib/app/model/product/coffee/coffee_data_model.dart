@@ -11,9 +11,16 @@ class CoffeeProductModel {
   String? productBrand;
   String? productPrice;
   String? productImagePath;
+  String? contents;
 
-  CoffeeProductModel(this.productId, this.productName, this.productBrand,
-      this.productPrice, this.productImagePath);
+  CoffeeProductModel(
+    this.productId,
+    this.productName,
+    this.productBrand,
+    this.productPrice,
+    this.productImagePath,
+    this.contents,
+  );
 
   CoffeeProductModel.fromJson(Map<String, dynamic> json) {
     productId = json['product_id'];
@@ -21,6 +28,7 @@ class CoffeeProductModel {
     productBrand = json['brand'];
     productPrice = json['price'];
     productImagePath = json['image_path'];
+    contents = json['contents'];
   }
 
   Map<String, dynamic> toJson() => {
@@ -28,6 +36,7 @@ class CoffeeProductModel {
         "name": productName,
         "brand": productBrand,
         "price": productPrice,
-        "image_path": productImagePath
+        "image_path": productImagePath,
+        "contents": contents
       };
 }

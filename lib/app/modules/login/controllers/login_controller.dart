@@ -18,7 +18,7 @@ class LoginController extends GetxController {
         var url = "${urlController.baseUrl}";
       }
 
-      Get.toNamed('/home');
+      Get.offNamed('/home');
     }
   }
 

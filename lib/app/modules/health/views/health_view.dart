@@ -58,12 +58,13 @@ class HealthView extends GetView<HealthController> {
             flex: 4,
             child: Padding(
               padding: EdgeInsets.all(13),
-              child: Column(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.accessibility_new_sharp,
@@ -71,10 +72,24 @@ class HealthView extends GetView<HealthController> {
                       ),
                       Column(
                         children: [
-                          Text('키 데이터'),
-                          Text('몸무게 데이터'),
+                          Text('키 데이터 cm'),
+                          Text('몸무게 데이터 kg'),
                         ],
                       ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: 60,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        '${controller.healthSteps.value}',
+                        style: TextStyle(fontSize: 40),
+                      ),
+                      Text('걸음'),
                     ],
                   ),
                 ],
