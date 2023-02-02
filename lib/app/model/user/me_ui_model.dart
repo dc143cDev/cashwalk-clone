@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/api/url_controller.dart';
 import 'package:cashwalkclone/app/model/user/user_data_model.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,8 @@ class MeUIModel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UrlController urlController = UrlController();
+
     return Container(
       height: 80,
       width: double.infinity,
@@ -29,7 +32,7 @@ class MeUIModel extends StatelessWidget {
               flex: 2,
               child: CircleAvatar(
                 backgroundImage:
-                    NetworkImage('http://localhost:8000/${model!.profile!}'),
+                    NetworkImage('${urlController.baseUrl}${model!.profile!}'),
                 radius: 30,
               ),
             ),

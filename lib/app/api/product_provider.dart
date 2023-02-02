@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/api/url_controller.dart';
 import 'package:get/get.dart';
 
 import '../model/product/coffee/coffee_data_model.dart';
@@ -12,9 +13,13 @@ import '../model/product/coffee/coffee_data_model.dart';
 //최종 유저가 사용할 UI 에서 빌더를 사용해 UI 모델에 데이터 값을 하나씩 담아줌. ->
 //유저가 시인할 UI에 빌드.
 class ProductProvider extends GetConnect implements GetxService {
+  String url = 'https://localhost:3001/';
+
+  UrlController urlController = UrlController();
+
   //api get 호출 메소드.
   Future<List<CoffeeProductModel>?> getStbProductData() async {
-    final response = await get('http://localhost:8000/getStbCoffee');
+    final response = await get('${urlController.baseUrl}getStbCoffee');
     print(response.body);
     if (response.status.hasError) {
       return Future.error({response.statusText});
@@ -24,7 +29,7 @@ class ProductProvider extends GetConnect implements GetxService {
   }
 
   Future<List<CoffeeProductModel>?> getTwsProductData() async {
-    final response = await get('http://localhost:8000/getTwsCoffee');
+    final response = await get('${urlController.baseUrl}getTwsCoffee');
     print(response.body);
     if (response.status.hasError) {
       return Future.error({response.statusText});
@@ -34,7 +39,7 @@ class ProductProvider extends GetConnect implements GetxService {
   }
 
   Future<List<CoffeeProductModel>?> getYdyProductData() async {
-    final response = await get('http://localhost:8000/getYdyCoffee');
+    final response = await get('${urlController.baseUrl}getYdyCoffee');
     print(response.body);
     if (response.status.hasError) {
       return Future.error({response.statusText});

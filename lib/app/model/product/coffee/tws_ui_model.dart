@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/api/url_controller.dart';
 import 'package:cashwalkclone/app/model/product/coffee/coffee_data_model.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class TwsUIModel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String baseUrl = '';
+    UrlController urlController = UrlController();
 
     return Container(
       height: 130,
@@ -32,7 +33,7 @@ class TwsUIModel extends StatelessWidget {
                 height: 90,
                 child: Container(
                   child: Image.network(
-                    'http://localhost:8000/${model!.productImagePath!}',
+                    '${urlController.baseUrl}${model!.productImagePath!}',
                     fit: BoxFit.fill,
                   ),
                 ),

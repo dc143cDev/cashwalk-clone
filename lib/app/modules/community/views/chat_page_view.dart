@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/api/url_controller.dart';
 import 'package:cashwalkclone/app/model/chat/chat_data_model.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +11,12 @@ class ChatPageView extends GetView {
 
   final ChatModel? model;
 
+
+
   @override
   Widget build(BuildContext context) {
+
+    UrlController urlController = UrlController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: bgColor,
@@ -44,7 +49,7 @@ class ChatPageView extends GetView {
                 ),
                 CircleAvatar(
                   backgroundImage: NetworkImage(
-                      'http://localhost:8000/images/profile/cat1.jpg'),
+                      '${urlController.baseUrl}images/profile/cat1.jpg'),
                 ),
                 SizedBox(
                   width: 10,

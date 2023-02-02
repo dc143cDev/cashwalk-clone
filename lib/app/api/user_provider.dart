@@ -1,12 +1,18 @@
 import 'dart:convert';
 
+import 'package:cashwalkclone/app/api/url_controller.dart';
 import 'package:get/get.dart';
 
 import '../model/user/user_data_model.dart';
 
 class UserProvider extends GetConnect implements GetxService {
+  String url = 'https://localhost:3001/';
+
+  UrlController urlController = UrlController();
+
   Future<List<UserModel>?> getUserData() async {
-    final response = await get('http://localhost:8000/getUserRanking');
+    final response = await get('${urlController.baseUrl}getUserRanking');
+    print('url controller: ${urlController.baseUrl}');
     print(response.body);
 
     if (response.status.hasError) {
@@ -19,14 +25,5 @@ class UserProvider extends GetConnect implements GetxService {
   @override
   void onInit() {
     super.onInit();
-    //
-    // httpClient
-    //   ..baseUrl = 'http://localhost:8000/get'
-    //   ..defaultContentType = 'application/json'
-    //   ..timeout = const Duration(seconds: 10)
-    //   ..addRequestModifier<dynamic>((request) {
-    //     request.headers['Authorization'] = '';
-    //     return request;
-    //   });
   }
 }

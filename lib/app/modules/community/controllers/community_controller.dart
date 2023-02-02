@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:cashwalkclone/app/api/chat_provider.dart';
+import 'package:cashwalkclone/app/api/url_controller.dart';
 import 'package:cashwalkclone/app/model/chat/chat_ui_model.dart';
 import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,8 @@ class CommunityController extends GetxController
   var writerNameController = TextEditingController();
 
   ChatProvider chatProvider = ChatProvider();
+
+  UrlController urlController = UrlController();
 
   var resource = ChatModel(1, '', '').obs;
 
@@ -142,7 +145,7 @@ class CommunityController extends GetxController
                     height: 45,
                     child: CircleAvatar(
                       backgroundImage: NetworkImage(
-                          'http://localhost:8000/images/profile/cat1.jpg'),
+                          '${urlController.baseUrl}images/profile/cat1.jpg'),
                     ),
                   ),
                   SizedBox(
