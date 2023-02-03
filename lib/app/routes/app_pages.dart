@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/modules/coupon/bindings/coupon_bindings.dart';
 import 'package:get/get.dart';
 
 import '../model/chat/chat_data_model.dart';
@@ -6,12 +7,12 @@ import '../modules/bottom_app_bar/views/bottom_app_bar_view.dart';
 import '../modules/camera/bindings/camera_binding.dart';
 import '../modules/camera/views/camera_view.dart';
 import '../modules/coffee/bindings/coffee_binding.dart';
-import '../modules/coffee/views/coffe_page_view.dart';
+import '../modules/coupon/views/coffe_page_view.dart';
 import '../modules/coffee/views/coffee_view.dart';
 import '../modules/community/bindings/community_binding.dart';
 import '../modules/community/views/chat_page_view.dart';
 import '../modules/community/views/community_view.dart';
-import '../modules/coffee/views/coupon_view.dart';
+import '../modules/coupon/views/coupon_view.dart';
 import '../modules/friends/bindings/friends_binding.dart';
 import '../modules/friends/views/friends_view.dart';
 import '../modules/health/bindings/health_binding.dart';
@@ -67,6 +68,11 @@ class AppPages {
       name: _Paths.COMMUNITY,
       page: () => const CommunityView(),
       binding: CommunityBinding(),
+    ),
+    GetPage(
+      name: _Paths.COUPON,
+      page: () => const CouponView(),
+      binding: CouponBinding(),
     ),
     GetPage(
       name: _Paths.CHATPAGE,

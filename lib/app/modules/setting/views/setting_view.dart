@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/app/modules/walk/controllers/walk_controller.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -10,6 +11,8 @@ class SettingView extends GetView<SettingController> {
   const SettingView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.put(SettingController());
+
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -26,18 +29,27 @@ class SettingView extends GetView<SettingController> {
         elevation: 0,
         backgroundColor: bgColor,
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            GetStorage().remove('imagePath');
-            GetStorage().remove('cash');
-            GetStorage().remove('currentCash');
-            GetStorage().remove('totalColor');
-            GetStorage().remove('walkColor');
-            GetStorage().remove('textColor');
-          },
-          child: Text('delete all'),
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ElevatedButton(
+              onPressed: () {
+                controller.is10kUpBtnClicked();
+              },
+              child: Text('+ 10k cash')),
+          ElevatedButton(
+            onPressed: () {
+              GetStorage().remove('imagePath');
+              GetStorage().remove('cash');
+              GetStorage().remove('currentCash');
+              GetStorage().remove('totalColor');
+              GetStorage().remove('walkColor');
+              GetStorage().remove('textColor');
+            },
+            child: Text('delete all'),
+          ),
+        ],
       ),
     );
   }

@@ -1,4 +1,4 @@
-import 'package:cashwalkclone/app/modules/coffee/views/coupon_view.dart';
+import 'package:cashwalkclone/app/modules/coupon/views/coupon_view.dart';
 import 'package:cashwalkclone/app/modules/shopping/views/shopping_view.dart';
 import 'package:cashwalkclone/app/modules/walk/controllers/walk_controller.dart';
 import 'package:cashwalkclone/app/modules/walk/views/walk_view.dart';
@@ -102,7 +102,7 @@ class ShoppingWidgetView extends GetView<WalkController> {
                   )),
                 ),
                 SizedBox(
-                  width: 15,
+                  width: 0,
                 ),
                 Obx(
                   () => Text(

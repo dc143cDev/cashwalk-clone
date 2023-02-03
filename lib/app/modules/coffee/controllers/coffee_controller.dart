@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:cashwalkclone/app/api/coffee_card_provider.dart';
+import 'package:http/http.dart' as http;
 import 'package:cashwalkclone/app/api/product_provider.dart';
 import 'package:cashwalkclone/app/api/url_controller.dart';
 import 'package:cashwalkclone/app/model/product/coffee/coffee_data_model.dart';
@@ -5,7 +8,7 @@ import 'package:cashwalkclone/app/model/product/coffee/coffee_data_model.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import '../../../model/product/coffee/coffee_card_model.dart';
+import '../../../model/product/coffee/coffee_card_data_model.dart';
 
 //stateMixin 을 같이 상속하여 api 호출 상태에 따라 state 관리
 class CoffeeController extends GetxController
@@ -20,12 +23,8 @@ class CoffeeController extends GetxController
   //프로바이더 선언. 구조를 공유하는 테이블들은 같은 프로바이더 사용.
   ProductProvider productProvider = ProductProvider();
 
-  Rx<List<CoffeeCardModel>> coffeeCard = Rx<List<CoffeeCardModel>>([]);
-  late CoffeeCardModel coffeeCardModel;
-
-  var titleForCard = ''.obs;
-  var brandForCard = ''.obs;
-  var priceForCard = ''.obs;
+  // Rx<List<CoffeeCardModel>> coffeeCard = Rx<List<CoffeeCardModel>>([]);
+  // late CoffeeCardModel coffeeCardModel;
 
   var itemCount = 0.obs;
 
@@ -80,26 +79,15 @@ class CoffeeController extends GetxController
   }
 
   //들어갈 밸류를 ui 단에서 넣어줄건지 여기서 한번 거쳐갈지는 보류.
-  addCoffeeCard(String title, String brand, String price) {
-    coffeeCardModel = CoffeeCardModel(
-      title: title,
-      brand: brand,
-      price: price,
-    );
-    coffeeCard.value.add(coffeeCardModel);
-    itemCount.value = coffeeCard.value.length;
-  }
-
-  isTakeBtnClicked() {
-    titleForCard.value = Get.arguments['title'];
-    brandForCard.value = Get.arguments['brand'];
-    priceForCard.value = Get.arguments['price'];
-    print('title card:${titleForCard.value}');
-    print('brand card:${brandForCard.value}');
-    print('price card:${priceForCard.value}');
-    print('${coffeeCard}');
-    storage.write('coffeeCard', coffeeCard);
-  }
+  // addCoffeeCard(String title, String brand, String price) {
+  //   coffeeCardModel = CoffeeCardModel(
+  //     title: title,
+  //     brand: brand,
+  //     price: price,
+  //   );
+  //   coffeeCard.value.add(coffeeCardModel);
+  //   itemCount.value = coffeeCard.value.length;
+  // }
 
   @override
   void onInit() {
@@ -110,7 +98,6 @@ class CoffeeController extends GetxController
     }, onError: (e) {
       change(null, status: RxStatus.error(e.toString()));
     });
-    storage.read('coffeeCard');
   }
 
   @override

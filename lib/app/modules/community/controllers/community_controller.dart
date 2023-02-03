@@ -34,7 +34,7 @@ class CommunityController extends GetxController
 
   createPost() async {
     //기존의 http 방식을 통해 데이터를 api 서버로 post.
-    var url = "${urlController.baseUrl}createPost";
+    var url = "${urlController.baseUrl}createChat";
     final postJson = jsonEncode({
       "chat_title": titleController.text,
       "chat_contents": contentController.text,

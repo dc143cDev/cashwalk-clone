@@ -212,6 +212,7 @@ class WalkController extends GetxController {
     stepsPointVisible.value++;
     print('steps value: ${steps.value}');
     DateTime timeStamp = event.timeStamp;
+    cashCount.value = storage.read('currentCash');
 
     //stepsForPoint 는 int 값이라 연산자에 대입 가능.
     //100 단위가 될때마다 stepsPointVisible 을 0 으로 돌리는 역할을 함.
@@ -242,6 +243,10 @@ class WalkController extends GetxController {
 
       storage.listenKey('imagePath', (value) {
         imagePath.value = value;
+      });
+
+      storage.listenKey('currentCash', (value) {
+        cashCount.value = value;
       });
 
       storage.listenKey('totalColor', (value) {

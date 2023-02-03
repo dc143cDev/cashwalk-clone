@@ -85,7 +85,7 @@ class StbUIModel extends StatelessWidget {
                         SizedBox(
                           width: 5,
                         ),
-                        Text(model!.productPrice!),
+                        Text(model!.productPrice!.toString()),
                       ],
                     )
                   ],

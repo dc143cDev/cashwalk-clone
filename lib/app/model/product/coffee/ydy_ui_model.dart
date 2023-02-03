@@ -74,7 +74,7 @@ class YdyUIModel extends StatelessWidget {
                       SizedBox(
                         width: 5,
                       ),
-                      Text(model!.productPrice!),
+                      Text(model!.productPrice!.toString()),
                     ],
                   )
                 ],

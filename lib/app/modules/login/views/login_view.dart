@@ -137,11 +137,6 @@ class LoginView extends GetView<LoginController> {
                     shape: StadiumBorder(),
                   ),
                   onPressed: () {
-                    coffeeController.addCoffeeCard(
-                      '1',
-                      controller.emailController.text,
-                      controller.passwordController.text,
-                    );
                     controller.isLoginBtnClicked();
                   },
                   child: Text(

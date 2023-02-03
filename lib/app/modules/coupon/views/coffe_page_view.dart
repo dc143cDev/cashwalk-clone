@@ -1,12 +1,16 @@
 import 'package:cashwalkclone/app/api/url_controller.dart';
 import 'package:cashwalkclone/app/model/product/coffee/coffee_data_model.dart';
 import 'package:cashwalkclone/app/modules/coffee/controllers/coffee_controller.dart';
+import 'package:cashwalkclone/app/modules/walk/controllers/walk_controller.dart';
 import 'package:cashwalkclone/app/widgets/custom_button_yellow.dart';
 import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-class CoffeePageView extends GetView<CoffeeController> {
+import '../controllers/coupon_controller.dart';
+
+class CoffeePageView extends GetView<CouponController> {
   const CoffeePageView({Key? key, this.model}) : super(key: key);
 
   final CoffeeProductModel? model;
@@ -14,8 +18,12 @@ class CoffeePageView extends GetView<CoffeeController> {
   @override
   Widget build(BuildContext context) {
     UrlController urlController = UrlController();
+    WalkController walkController = WalkController();
 
-    Get.put(CoffeeController());
+    Get.put(CouponController());
+    Get.put(WalkController());
+
+    GetStorage storage = GetStorage();
 
     return Scaffold(
       appBar: AppBar(
@@ -149,36 +157,19 @@ class CoffeePageView extends GetView<CoffeeController> {
             btnText: '구매하기',
             onPressed: () {
               controller.isTakeBtnClicked();
-              controller.addCoffeeCard(
-                // Get.arguments['title'],
-                // Get.arguments['brand'], Get.arguments['price'],
-                controller.titleForCard.value,
-                controller.brandForCard.value,
-                controller.priceForCard.value,
-              );
-              print('arg title: ${Get.arguments['title']}');
+
+              // controller.isTakeBtnClicked();
+              // if (int.parse(controller.priceForCard.value) >=
+              //     controller.cashWallet.value) {
+              //   Get.snackbar('잔액이 부족합니다.', '현재 보유중인 캐시가 모자랍니다');
+              // } else {
+              //   walkController.cashCount.value.toInt() -
+              //       int.parse(controller.priceForCard.value).toInt();
+              //
+              //   controller.cardPost();
+              // }
+              // print('arg title: ${Get.arguments['title']}');
             },
-          ),
-          Obx(
-            () => SizedBox(
-              width: 400,
-              height: 100,
-              child: ListView.builder(
-                itemCount: controller.coffeeCard.value.length,
-                itemBuilder: ((context, index) {
-                  return ListTile(
-                    title: Text(
-                      controller.coffeeCard.value[index].title!.toString(),
-                      style: TextStyle(color: textDark),
-                    ),
-                    subtitle: Text(
-                      controller.coffeeCard.value[index].brand!.toString(),
-                      style: TextStyle(color: textDark),
-                    ),
-                  );
-                }),
-              ),
-            ),
           ),
         ],
       ),

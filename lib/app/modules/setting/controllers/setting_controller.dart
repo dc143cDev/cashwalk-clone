@@ -1,9 +1,20 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../../walk/controllers/walk_controller.dart';
 
 class SettingController extends GetxController {
-  //TODO: Implement SettingController
+  WalkController walkController = WalkController();
 
-  final count = 0.obs;
+  GetStorage storage = GetStorage();
+
+  is10kUpBtnClicked() {
+    walkController.cashCount.value += 10000;
+    print(walkController.cashCount.value);
+    storage.write('currentCash', walkController.cashCount.value);
+    storage.save();
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +29,4 @@ class SettingController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
