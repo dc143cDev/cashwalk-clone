@@ -62,35 +62,65 @@ class HealthView extends GetView<HealthController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.accessibility_new_sharp,
-                        size: 80,
+                  Material(
+                    elevation: 10,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    child: Container(
+                      height: 130,
+                      width: 130,
+                      decoration: BoxDecoration(
+                        color: accentYellow,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
-                      Column(
-                        children: [
-                          Text('키 데이터 cm'),
-                          Text('몸무게 데이터 kg'),
-                        ],
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.accessibility_new_sharp,
+                              size: 80,
+                            ),
+                            Obx(
+                              () => Column(
+                                children: [
+                                  Text('${controller.userCM.value}cm'),
+                                  Text('${controller.userWeight.value}kg'),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
+                    ),
                   ),
                   SizedBox(
-                    width: 60,
+                    width: 40,
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        '${controller.healthSteps.value}',
-                        style: TextStyle(fontSize: 40),
+                  Material(
+                    elevation: 10,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    child: Container(
+                      height: 130,
+                      width: 130,
+                      decoration: BoxDecoration(
+                        color: accentYellow,
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
-                      Text('걸음'),
-                    ],
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              '${controller.healthSteps.value}',
+                              style: TextStyle(fontSize: 40),
+                            ),
+                            Text('걸음'),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

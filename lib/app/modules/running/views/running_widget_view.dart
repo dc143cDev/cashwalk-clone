@@ -13,12 +13,13 @@ class RunningWidgetView extends GetView {
       child: Stack(
         children: [
           Container(
-            height: 240,
+            width: 400,
+            height: 200,
             decoration: BoxDecoration(
-              color: bgColor,
+              color: accentBrown,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey,
+                  color: accentBrown,
                   blurRadius: 5.0,
                   spreadRadius: 0.0,
                   offset: Offset(0, 7),
@@ -30,9 +31,22 @@ class RunningWidgetView extends GetView {
             ),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(8, 108, 8, 8),
-              child: Row(
+              child: Column(
                 children: [
-                  Text('data'),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    '현재 목표: 500m 완주',
+                    style: TextStyle(color: bgColor),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    '목표 설정하러 가기 >',
+                    style: TextStyle(color: bgColor),
+                  ),
                 ],
               ),
             ),
@@ -41,14 +55,7 @@ class RunningWidgetView extends GetView {
             height: 100,
             decoration: BoxDecoration(
               color: accentPapaya,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  blurRadius: 5.0,
-                  spreadRadius: 0.0,
-                  offset: Offset(0, 7),
-                ),
-              ],
+              boxShadow: [],
               borderRadius: BorderRadius.all(
                 Radius.circular(12),
               ),

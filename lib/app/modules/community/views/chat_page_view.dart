@@ -11,11 +11,8 @@ class ChatPageView extends GetView {
 
   final ChatModel? model;
 
-
-
   @override
   Widget build(BuildContext context) {
-
     UrlController urlController = UrlController();
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -87,6 +84,19 @@ class ChatPageView extends GetView {
             height: 5,
             width: double.infinity,
           ),
+          SizedBox(
+            height: 30,
+          ),
+          Center(
+              child: Text(
+            '댓글이 없습니다',
+            style: TextStyle(color: Colors.grey),
+          )),
+          Center(
+              child: Text(
+            '댓글을 달아주세요',
+            style: TextStyle(color: Colors.grey),
+          )),
         ],
       ),
     );

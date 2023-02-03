@@ -24,6 +24,7 @@ abstract class Routes {
   static const SETTING = _Paths.SETTING;
   static const NOTIFICATION = _Paths.NOTIFICATION;
   static const LOGIN = _Paths.LOGIN;
+  static const LOADING = _Paths.LOADING;
 }
 
 abstract class _Paths {
@@ -49,4 +50,5 @@ abstract class _Paths {
   static const SETTING = '/setting';
   static const NOTIFICATION = '/notification';
   static const LOGIN = '/login';
+  static const LOADING = '/loading';
 }

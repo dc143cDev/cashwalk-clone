@@ -15,6 +15,7 @@ class QuizWidgetView extends GetView<WalkController> {
         children: [
           Container(
             height: 240,
+            width: 400,
             decoration: BoxDecoration(
               color: bgColor,
               boxShadow: [
@@ -31,9 +32,15 @@ class QuizWidgetView extends GetView<WalkController> {
             ),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(8, 108, 8, 8),
-              child: Row(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('data'),
+                  Text('현재 가장 최신 버전의 flutter 버전은 무엇인가요?'),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text('정답 맞추러 가기 >'),
                 ],
               ),
             ),
@@ -72,7 +79,7 @@ class QuizWidgetView extends GetView<WalkController> {
                 Text(
                   '다음 퀴즈까지 \n남은 시간 :',
                   style: TextStyle(
-                    fontFamily: 'LS',
+                    fontFamily: 'IBMKR',
                     fontSize: 16,
                     fontWeight: FontWeight.w300,
                     color: bgColor,
@@ -89,7 +96,7 @@ class QuizWidgetView extends GetView<WalkController> {
                       ' 33 : 33 : 33',
                       style: TextStyle(
                           color: accentYellow,
-                          fontSize: 26,
+                          fontSize: 23,
                           fontFamily: 'IBMKR',
                           fontWeight: FontWeight.w700),
                     ),

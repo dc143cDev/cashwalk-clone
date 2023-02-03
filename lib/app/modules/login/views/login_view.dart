@@ -11,7 +11,7 @@ class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    CoffeeController coffeeController = CoffeeController();
+    Get.put(LoginController());
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -75,6 +75,7 @@ class LoginView extends GetView<LoginController> {
                 height: 40,
               ),
               TextFormField(
+                controller: controller.cmController,
                 decoration: InputDecoration(
                   hintStyle: TextStyle(color: accentYellow),
                   border: OutlineInputBorder(
@@ -86,14 +87,14 @@ class LoginView extends GetView<LoginController> {
                   filled: true,
                   contentPadding: EdgeInsets.only(top: 14.0),
                   prefixIcon: Icon(
-                    Icons.email,
+                    Icons.accessibility_new_sharp,
                     color: accentYellow,
                   ),
-                  hintText: 'Enter your Email',
+                  hintText: '키를 입력해주세요',
                 ),
                 validator: (email) {
                   if (email!.isEmpty) {
-                    return '이메일을 입력하세요.';
+                    return '키를 입력해주세요.';
                   }
                   return null;
                 },
@@ -102,6 +103,7 @@ class LoginView extends GetView<LoginController> {
                 height: 20,
               ),
               TextFormField(
+                controller: controller.weightController,
                 decoration: InputDecoration(
                   hintStyle: TextStyle(color: accentYellow),
                   border: OutlineInputBorder(
@@ -113,14 +115,14 @@ class LoginView extends GetView<LoginController> {
                   filled: true,
                   contentPadding: EdgeInsets.only(top: 14.0),
                   prefixIcon: Icon(
-                    Icons.email,
+                    Icons.accessibility_new_sharp,
                     color: accentYellow,
                   ),
-                  hintText: 'Enter your Password',
+                  hintText: '몸무게를 입력해주세요',
                 ),
                 validator: (password) {
                   if (password!.isEmpty) {
-                    return '비밀번호를 입력하세요.';
+                    return '몸무게를 입력해주세요';
                   }
                   return null;
                 },
@@ -149,7 +151,7 @@ class LoginView extends GetView<LoginController> {
                 height: 60,
               ),
               Text(
-                '- OR -',
+                '- 환영합니다 -',
                 style: TextStyle(color: bgColor),
               ),
               SizedBox(
@@ -158,7 +160,7 @@ class LoginView extends GetView<LoginController> {
               TextButton(
                 onPressed: () {},
                 child: Text(
-                  'Sign in',
+                  '건강 정보를 입력해주세요.',
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 20,

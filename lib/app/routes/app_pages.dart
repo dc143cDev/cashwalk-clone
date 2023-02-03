@@ -1,4 +1,3 @@
-import 'package:cashwalkclone/app/modules/coupon/bindings/coupon_bindings.dart';
 import 'package:get/get.dart';
 
 import '../model/chat/chat_data_model.dart';
@@ -7,11 +6,12 @@ import '../modules/bottom_app_bar/views/bottom_app_bar_view.dart';
 import '../modules/camera/bindings/camera_binding.dart';
 import '../modules/camera/views/camera_view.dart';
 import '../modules/coffee/bindings/coffee_binding.dart';
-import '../modules/coupon/views/coffe_page_view.dart';
 import '../modules/coffee/views/coffee_view.dart';
 import '../modules/community/bindings/community_binding.dart';
 import '../modules/community/views/chat_page_view.dart';
 import '../modules/community/views/community_view.dart';
+import '../modules/coupon/bindings/coupon_bindings.dart';
+import '../modules/coupon/views/coffe_page_view.dart';
 import '../modules/coupon/views/coupon_view.dart';
 import '../modules/friends/bindings/friends_binding.dart';
 import '../modules/friends/views/friends_view.dart';
@@ -19,6 +19,8 @@ import '../modules/health/bindings/health_binding.dart';
 import '../modules/health/views/health_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/loading/bindings/loading_binding.dart';
+import '../modules/loading/views/loading_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/my_bottom_nav_bar/bindings/my_bottom_nav_bar_binding.dart';
@@ -41,7 +43,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.LOADING;
 
   static final routes = [
     GetPage(
@@ -133,6 +135,11 @@ class AppPages {
       name: _Paths.LOGIN,
       page: () => const LoginView(),
       binding: LoginBinding(),
+    ),
+    GetPage(
+      name: _Paths.LOADING,
+      page: () => const LoadingView(),
+      binding: LoadingBinding(),
     ),
   ];
 }

@@ -1,12 +1,15 @@
 import 'package:cashwalkclone/app/api/url_controller.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 class LoginController extends GetxController {
   var formKey = GlobalKey<FormState>();
 
-  var emailController = TextEditingController();
-  var passwordController = TextEditingController();
+  var cmController = TextEditingController();
+  var weightController = TextEditingController();
+
+  GetStorage storage = GetStorage();
 
   UrlController urlController = UrlController();
 
@@ -14,9 +17,10 @@ class LoginController extends GetxController {
   //발리데이터 데이터를 확인하고, 올바른 데이터일시 로그인 쿼리 날림.
   isLoginBtnClicked() {
     if (formKey.currentState!.validate()) {
-      getEmailData() async {
-        var url = "${urlController.baseUrl}";
-      }
+      print('cmC text:${cmController.text}');
+      storage.write('userCM', cmController.text);
+      storage.write('userWeight', weightController.text);
+      print(storage.read('userCM'));
 
       Get.offNamed('/home');
     }

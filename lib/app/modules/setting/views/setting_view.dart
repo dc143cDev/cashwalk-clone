@@ -33,21 +33,62 @@ class SettingView extends GetView<SettingController> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ElevatedButton(
+          Text('developer : dc143c(김예준)'),
+          SizedBox(
+            height: 10,
+          ),
+          Text('github Releases : 베타 0.0.2'),
+          SizedBox(
+            height: 80,
+          ),
+          Text('debug tools :'),
+          Center(
+            child: Container(
+              height: 60,
+              width: 230,
+              child: ElevatedButton(
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: accentYellow),
+                  onPressed: () {
+                    controller.is10kUpBtnClicked();
+                  },
+                  child: Text('+ 10k cash')),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: 60,
+            width: 230,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: accentYellow),
               onPressed: () {
-                controller.is10kUpBtnClicked();
+                GetStorage().remove('imagePath');
+                GetStorage().remove('cash');
+                GetStorage().remove('currentCash');
+                GetStorage().remove('totalColor');
+                GetStorage().remove('walkColor');
+                GetStorage().remove('textColor');
               },
-              child: Text('+ 10k cash')),
-          ElevatedButton(
-            onPressed: () {
-              GetStorage().remove('imagePath');
-              GetStorage().remove('cash');
-              GetStorage().remove('currentCash');
-              GetStorage().remove('totalColor');
-              GetStorage().remove('walkColor');
-              GetStorage().remove('textColor');
-            },
-            child: Text('delete all'),
+              child: Text('delete all'),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: 60,
+            width: 230,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(backgroundColor: accentYellow),
+              onPressed: () {
+                GetStorage().remove('userCM');
+                GetStorage().remove('userWeight');
+                print(GetStorage().read('userCM'));
+              },
+              child: Text('delete cm/weight'),
+            ),
           ),
         ],
       ),

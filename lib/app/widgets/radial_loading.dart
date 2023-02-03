@@ -1,3 +1,4 @@
+import 'package:cashwalkclone/palette.dart';
 import 'package:flutter/material.dart';
 
 class RadialLoading extends StatelessWidget {
@@ -23,7 +24,7 @@ class RadialLoading extends StatelessWidget {
                       stops: [value, value],
                       center: Alignment.center,
                       colors: [
-                        Colors.greenAccent,
+                        accentYellow,
                         Colors.grey.withAlpha(200),
                       ],
                     ).createShader(rect);

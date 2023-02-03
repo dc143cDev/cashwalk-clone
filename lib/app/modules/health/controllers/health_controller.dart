@@ -1,12 +1,18 @@
 import 'package:cashwalkclone/app/modules/health/views/health_map_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:health/health.dart';
 
 class HealthController extends GetxController {
   isFABClicked() {
     Get.to(HealthMapView());
   }
+
+  GetStorage storage = GetStorage();
+
+  var userCM = ''.obs;
+  var userWeight = ''.obs;
 
   HealthFactory health = HealthFactory();
 
@@ -31,6 +37,10 @@ class HealthController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    print('user cm health:${storage.read('userCM')}');
+    userCM.value = storage.read('userCM');
+    userWeight.value = storage.read('userWeight');
+    print('user cm obs: ${userCM.value}');
     health.requestAuthorization;
     fetchHealthData();
     // Future.delayed(Duration(seconds: 1), () async {

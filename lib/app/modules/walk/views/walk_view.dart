@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cashwalkclone/app/modules/camera/controllers/camera_controller.dart';
 import 'package:cashwalkclone/app/modules/notification/views/notification_view.dart';
 import 'package:cashwalkclone/app/modules/quiz/views/quiz_widget_view.dart';
+import 'package:cashwalkclone/app/modules/running/views/d_widget_view.dart';
 import 'package:cashwalkclone/app/modules/running/views/running_widget_view.dart';
 import 'package:cashwalkclone/app/modules/setting/views/setting_view.dart';
 import 'package:cashwalkclone/app/modules/shopping/views/shopping_widget_view.dart';
@@ -138,6 +139,10 @@ class WalkView extends GetView<WalkController> {
               height: 7,
             ),
             RunningWidgetView(),
+            SizedBox(
+              height: 7,
+            ),
+            DWidget(),
           ],
         ),
       ),
